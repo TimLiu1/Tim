@@ -8,6 +8,7 @@
 
     <title>Tim's web</title>
     <link href="/css//bootstrap.min.css" rel="stylesheet">
+    <link href="/css//flat.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
 </head>
@@ -27,6 +28,7 @@
 <script src="/js/ui-bootstrap-tpls.min.js"></script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/html/js/directives.js"></script>
 <script src="/html/main/js/app.js"></script>
 <script src="/html/main/js/router.js"></script>
 <script src="/html/main/js/controllers.js"></script>

@@ -15,4 +15,12 @@ module.exports = function (router) {
         
     });
 
+      router.get('/blog', function (req, res) {
+        
+        
+        res.render('blog', model);
+        
+        
+    });
+
 };

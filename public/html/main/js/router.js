@@ -6,7 +6,12 @@ router.config(['$routeProvider',
                 templateUrl: '/html/main/partials/overview.html',
                 controller: 'MainCtrl'
             }).
-            otherwise({
-                redirectTo: '/overview'
+             when('/message', {
+                templateUrl: '/html/main/partials/message.html',
+                controller: 'MainCtrl'
             });
+            // .
+            // otherwise({
+            //     redirectTo: '/overview'
+            // });
     }])
