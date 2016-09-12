@@ -6,6 +6,12 @@
         "views": "path:./public/templates"
     },
 
+      "databaseConfig": {
+        "host": "localhost"
+        // "database": "huibaoDB",
+        // "options": {"user": "huibao", "pass": "1qaz2wsx"}
+    },
+
     
     "view engines": {
         "dust": {

@@ -10,13 +10,15 @@
     "all": "npm run build && npm run test"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "construx": "^1.0.0",
     "construx-copier": "^1.0.0",
     "construx-dustjs": "^1.1.0",
     "eslint": "^1.10.3",
     "express": "^4.12.2",
     "kraken-js": "^2.0.0",
-    "makara": "^2.0.3"
+    "makara": "^2.0.3",
+    "mongoose": "^4.6.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
