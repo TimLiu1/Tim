@@ -7,7 +7,7 @@
     },
 
       "databaseConfig": {
-        "host": "localhost"
+        "host": "115.159.52.72"
         // "database": "huibaoDB",
         // "options": {"user": "huibao", "pass": "1qaz2wsx"}
     },
