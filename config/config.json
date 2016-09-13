@@ -6,8 +6,9 @@
         "view engine": "js",
         "views": "path:./.build/templates"
     },
-    
 
+  
+       
     
     "view engines": {
         "js": {
@@ -49,7 +50,7 @@
                 ]
             }
         },
-        
+
 
         "static": {
             "module": {
@@ -60,6 +61,24 @@
         "router": {
             "module": {
                 "arguments": [{ "directory": "path:./controllers" }]
+            }
+        },
+
+
+
+        /**
+         * Enable *ONLY* CSRF filtered by route.
+         * Note: The route "regex" needs the double parens
+         * because of how express parses route strings.
+         */
+        "csrf": {
+            "enabled": false,
+            "priority": 111,
+            "route": "*",
+            "module": {
+                "name": "lusca",
+                "method": "csrf",
+                "arguments": [ {} ]
             }
         }
 

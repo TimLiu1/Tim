@@ -11,23 +11,35 @@
     <link href="/css/flat-ui.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/blog.css" rel="stylesheet">
+    <link href="/css/demo.css" rel="stylesheet">
+        <link rel="shortcut icon" href="/img/favicon.ico">
+
+
+
+      <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body ng-app="blogApp">
 
 </body>
 <div class="container-fluid view-container">
-          {>"blogHeader" /}
+    {>"blogHeader" /}
     <div ng-view class="view-frame">
     </div>
 </div>
 
+<script src="/js/jquery.min.js"></script>
 <script src="/js/angular.min.js"></script>
-    <!--<script src="/js/angular-animate.min.js"></script>-->
+<!--<script src="/js/angular-animate.min.js"></script>-->
 <script src="/js/angular-route.min.js"></script>
 <script src="/js/ui-bootstrap-tpls.min.js"></script>
-<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/video.js"></script>
+<script src="/js/application.js"></script>
 <script src="/js/flat-ui.js"></script>
 <script src="/html/js/directives.js"></script>
 <script src="/html/blog/js/app.js"></script>

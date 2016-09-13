@@ -1,6 +1,32 @@
-{>"layouts/master" /}
 
-{<body}
-    <h1>File not found</h1>
-    <p>The URL <code>{url}</code> did not resolve to a route.</p>
-{/body}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    <style href="./style.css" rel="stylesheet">
+      h3{
+            padding-top:300px;
+            text-align: center;
+            color: #ff57ff
+        }
+        </style>
+    </head>
+    <body>
+
+        <div id="wrapper">
+          <div id="contain" style="background-image:url('/images/main-bg.jpg'); background-repeat:no-repeat;height:500px;">
+    <h3>你的URl不存在</h3>
+    
+    </div>
+        </div>
+
+    
+        <script src="/js/app.js"></script>
+    
+    </body>
+</html>
+
+
+ 
+ 

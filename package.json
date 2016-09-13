@@ -18,7 +18,10 @@
     "express": "^4.12.2",
     "kraken-js": "^2.0.0",
     "makara": "^2.0.3",
-    "mongoose": "^4.6.0"
+    "moment": "^2.15.0",
+    "mongoose": "^4.6.0",
+    "mongoose-paginate": "^5.0.0",
+    "mongoose-updated_at": "0.0.2"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
