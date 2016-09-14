@@ -40,7 +40,7 @@ module.exports = function (app) {
                 console.log("查询数据库出错"+err);
                 res.json({err:err})
             }
-            console.log(blogs);
+        logger.info(JSON.stringify(blogs));
             res.json(blogs)
         })
     })
