@@ -2,6 +2,7 @@
 
 let Promise = require('bluebird');
 let blog = require('../../../models/blog/Blog');
+let logger = require('log4js').getLogger('tim');
 
 module.exports = function (app) {
     //发布博文
@@ -33,7 +34,7 @@ module.exports = function (app) {
     })
 
     app.get('/blogList',function(req,res,next){
-        console.log('查询博客列表');
+        logger.info('---查询博客列表----');
         blog.find({},function(err,blogs){
             if(err){
                 console.log("查询数据库出错"+err);

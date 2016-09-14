@@ -1,6 +1,6 @@
 {
 
-    
+    "loggerLevel": "info",
     "express": {
         "view cache": false,
         "view engine": "js",

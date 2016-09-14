@@ -4,11 +4,11 @@ router.config(['$routeProvider',
         $routeProvider.
             when('/index', {
                 templateUrl: '/html/blog/partials/index.html',
-                controller: 'blogCtrl'
+                controller: 'BlogCtrl'
             }).
              when('/message', {
                 templateUrl: '/html/blog/partials/message.html',
-                controller: 'blogCtrl'
+                controller: 'BlogCtrl'
             })
             .
             otherwise({

@@ -1,5 +1,5 @@
 {
-    
+     "loggerLevel": "debug",
     "express": {
         "view cache": false,
         "view engine": "dust",
