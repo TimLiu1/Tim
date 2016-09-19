@@ -192,7 +192,7 @@ h2.section-heading {
 /* Portfolio section*/
 section {
   color: black;
-  background: url('https://41.media.tumblr.com/92e61775d4c3edcc5145936e3703d125/tumblr_nt5uo9fH9y1ud7rr3o1_1280.jpg') no-repeat center center fixed;
+  background: url('/images/shdx.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 

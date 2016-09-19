@@ -58,6 +58,19 @@
                     }
                 ]
             }
+        },
+         "csrf": {
+            "enabled": false,
+            "priority": 111,
+            "route": "/((?!tpi|weixin|api|level|data|agent))*",
+            "module": {
+                "name": "lusca",
+                "method": "csrf",
+                "arguments": [
+                    {}
+                ]
+            }
         }
+
     }
 }

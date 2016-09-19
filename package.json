@@ -19,6 +19,7 @@
     "kraken-js": "^2.0.0",
     "log4js": "^0.6.38",
     "makara": "^2.0.3",
+    "markdown": "^0.5.0",
     "moment": "^2.15.0",
     "mongoose": "^4.6.0",
     "mongoose-paginate": "^5.0.0",

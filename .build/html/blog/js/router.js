@@ -6,11 +6,14 @@ router.config(['$routeProvider',
                 templateUrl: '/html/blog/partials/index.html',
                 controller: 'BlogCtrl'
             }).
-             when('/message', {
-                templateUrl: '/html/blog/partials/message.html',
+             when('/postBlog', {
+                templateUrl: '/html/blog/partials/post-blog.html',
                 controller: 'BlogCtrl'
-            })
-            .
+            }).
+             when('/checkDialog', {
+                templateUrl: '/html/blog/partials/checkDialog.html',
+                controller: 'BlogCtrl'
+            }).
             otherwise({
                 redirectTo: '/index'
             });

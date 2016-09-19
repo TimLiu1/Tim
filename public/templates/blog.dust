@@ -12,6 +12,7 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/blog.css" rel="stylesheet">
     <link href="/css/demo.css" rel="stylesheet">
+    <link href="/css/wangEditor.min.css" rel="stylesheet">
         <link rel="shortcut icon" href="/img/favicon.ico">
 
 
@@ -37,7 +38,12 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/flat-ui.min.js"></script>
 <script src="/js/application.js"></script>
+ <!--<script src="/js/wangEditor.min.js"></script>-->
 <script src="/js/video.js"></script>
+ <script src="/js/bootbox.min.js"></script>
+    <script src="/js/ngBootbox.js"></script>
+    
+    
 <!--<script src="/js/angular-animate.min.js"></script>-->
 <script src="/js/ui-bootstrap-tpls.min.js"></script>
 <script src="/js/angular-route.min.js"></script>
@@ -47,6 +53,7 @@
 <script src="/html/blog/js/app.js"></script>
 <script src="/html/blog/js/router.js"></script>
 <script src="/html/blog/js/controllers.js"></script>
+<script src="/html/blog/js/services.js"></script>
 </body>
 
 </html>

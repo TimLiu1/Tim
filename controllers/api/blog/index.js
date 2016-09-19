@@ -1,8 +1,11 @@
 'use strict'
 
 let Promise = require('bluebird');
-let blog = require('../../../models/blog/Blog');
+let markdown = require('markdown').markdown;
 let logger = require('log4js').getLogger('tim');
+let blog = require('../../../models/blog/Blog');
+
+
 
 module.exports = function (app) {
     //发布博文
@@ -34,14 +37,20 @@ module.exports = function (app) {
     })
 
     app.get('/blogList',function(req,res,next){
+        console.log(req.query)
         logger.info('---查询博客列表----');
         blog.find({},function(err,blogs){
             if(err){
                 console.log("查询数据库出错"+err);
-                res.json({err:err})
+                res.json({code:'999',msg:'查询数据库失败'+err})
             }
-        logger.info(JSON.stringify(blogs));
-            res.json(blogs)
+            blogs.forEach((e) => {
+                e.content = markdown.toHTML(e.content);
+            });
+            var model = {
+                blogs:blogs
+            }
+            res.json(model)
         })
     })
 

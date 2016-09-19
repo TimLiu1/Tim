@@ -46,6 +46,12 @@
                     {
                         "i18n": "config:i18n",
                         "specialization": "config:specialization"
+                    },
+                     {
+                        "csrf": false,
+                        "xframe": "SAMEORIGIN",
+                        "p3p": false,
+                        "csp": false
                     }
                 ]
             }
@@ -63,8 +69,20 @@
                 "arguments": [{ "directory": "path:./controllers" }]
             }
         },
-
-
+         /**
+         * Override the default lusca configuration to disable CSRF handling.
+         */
+        "appsec": {
+            "module": {
+                "arguments": [
+                    {
+                        "xframe": "SAMEORIGIN",
+                        "p3p": false,
+                        "csp": false
+                    }
+                ]
+            }
+        },
 
         /**
          * Enable *ONLY* CSRF filtered by route.
@@ -72,9 +90,9 @@
          * because of how express parses route strings.
          */
         "csrf": {
-            "enabled": false,
+            "enabled": true,
             "priority": 111,
-            "route": "*",
+            "route": "/((?!api))*",
             "module": {
                 "name": "lusca",
                 "method": "csrf",

@@ -1,0 +1,25 @@
+<uib-alert ng-if="alert" type="{{alert.type}}" close="closeAlert()">{{alert.message}}</uib-alert>
+<div class="panel panel-default" style="margin-bottom:0;">
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input type="radio" name="checkResult" value="2" checked>
+                    是
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="checkResult" value="0">
+                    否
+                </label>
+            </div>
+            <input class="form-control" ng-model="node">
+            <div class="form-group">
+                <p class="form-control-static">审核不通过原因：</p>
+                <textarea class="form-control" rows="2" id="checkReason"></textarea>
+            </div>
+          -->  {{node}}
+        </form>
+    </div>
+</div>
+
+
