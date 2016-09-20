@@ -37,11 +37,10 @@ module.exports = function (app) {
     })
 
     app.get('/blogList',function(req,res,next){
-        console.log(req.query)
         logger.info('---查询博客列表----');
         blog.find({},function(err,blogs){
             if(err){
-                console.log("查询数据库出错"+err);
+               logger.info("查询数据库出错"+err);
                 res.json({code:'999',msg:'查询数据库失败'+err})
             }
             blogs.forEach((e) => {
@@ -50,6 +49,50 @@ module.exports = function (app) {
             var model = {
                 blogs:blogs
             }
+
+            console.log(model);
+            res.json(model)
+        })
+    })
+      app.get('/deleteBlog',function(req,res,next){
+          var _id = req.query._id;
+        logger.info('删除博客'+_id);
+        blog.remove({_id:_id},function(err){
+            if(err){
+               logger.info("查询数据库出错"+err);
+                res.json({code:'999',msg:'查询数据库失败'+err})
+            }
+           var model = {
+               code:'000',
+               msg:'删除成功' 
+           } 
+            res.json(model)
+        })
+    })
+
+     app.post('/updateBlog',function(req,res,next){
+         var contentJson = {};
+         let title = req.body.title;
+         let content = req.body.coontent;
+         if(title){
+             contentJson.title = title;
+         }
+         if(content){
+             contentJson.content = content;
+         }
+
+          var _id = req.body._id;
+
+        logger.info('更新博客'+_id);
+        blog.update({_id:_id},{$push:contentJson},function(err){
+            if(err){
+               logger.info("更新数据库出错"+err);
+                res.json({code:'999',msg:'更新数据库失败'+err})
+            }
+           var model = {
+               code:'000',
+               msg:'更新成功' 
+           } 
             res.json(model)
         })
     })

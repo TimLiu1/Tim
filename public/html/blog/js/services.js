@@ -1,27 +1,34 @@
-var blogServices = angular.module('blogServices',[]);
+var blogServices = angular.module('blogServices', []);
 var HOST = '/api/blog/'
 
 
-var responseSuccess = function(res) {
+var responseSuccess = function (res) {
     if (res.data.code && res.data.code != '000') {
         return { err: res.data.msg }
     }
     return res.data;
 };
-var responseError = function(err) {
+var responseError = function (err) {
     return { err: err, msg: '调用后台出错' };
 };
 
 
 
 
-blogServices.factory('blogS',['$http',function($http){
+blogServices.factory('blogS', ['$http', function ($http) {
     return {
-        postBlog: function(blog){
-            return $http.post(HOST+'blog',blog).then(responseSuccess,responseError);
+        postBlog: function (blog) {
+            return $http.post(HOST + 'blog', blog).then(responseSuccess, responseError);
         },
-         getBlogList: function(blog){
-            return $http.get(HOST+'blogList').then(responseSuccess,responseError);
-        }
+        getBlogList: function (blog) {
+            return $http.get(HOST + 'blogList').then(responseSuccess, responseError);
+        },
+        deleteBlog: function (id) {
+            return $http.get(HOST + 'deleteBlog?_id=' + id).then(responseSuccess, responseError);
+        },
+        updateBlog: function (obj) {
+            return $http.post(HOST + 'updateBlog',obj).then(responseSuccess, responseError);
+        },
+
     }
 }])

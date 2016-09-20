@@ -54,6 +54,7 @@
 <script src="/html/blog/js/router.js"></script>
 <script src="/html/blog/js/controllers.js"></script>
 <script src="/html/blog/js/services.js"></script>
+<script src="/html/blog/js/filters.js"></script>
 </body>
 
 </html>

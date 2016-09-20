@@ -5,6 +5,7 @@ var blogApp = angular.module('blogApp', [
     'blogRouter',
     'ngBootbox',
     'blogServices',
+    'blogFilters',
     'blogControllers',
     'commonDirectives'
 ])

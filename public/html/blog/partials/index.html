@@ -1,8 +1,16 @@
 <div id="contain" class="container">
 <div ng-repeat="blog in blogs">
-<h2>{{blog.title}}</h2>
+<h3>{{blog.title}}</h3>
+  <div class="collapse navbar-collapse" id="navbar-collapse-5">
+ <ul class="nav navbar-nav">
+            <li><a href="#" ng-click="delete(this)">删除</a></li>
+            <li><a href="/blog#/updateBlog/{{blog}}">更新</a></li>
+            <li ><a>作者: Tim</a></li>
+            <li><a href="#">标签</a></li>
+           </ul>
+  </div>
 <hr>
-<p>{{blog.content}}</p>
+<p ng-bind-html="blog.content | trust""></p>
 </div>
 </div>
 
