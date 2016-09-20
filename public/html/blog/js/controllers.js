@@ -84,24 +84,32 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
             })
         }
-        //更新blog 
-
-         $scope.update = function (blog) {
-             $location.url('/updateBlog/'+blog.blog);
-         }
     }])
 
 
     blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window','$location', '$routeParams',
     function ($scope, blogS, $ngBootbox, $window,$location, $routeParams) {
         $scope.search = {};
-        console.log($routeParams.blog)
+      $scope._id = $routeParams._id;
         
         //更新blog 
-        $scope.update = function (blog) {
-            $ngBootbox.confirm("你确定更新" + blog.blog.title).then(function () {
-                $scope.search._id = blog.blog._id
-                blogS.updateBlog(_id).then(function (data) {
+        $scope.getblog = function(){
+              blogS.getBlog($scope._id).then(function(data){
+                   if (data.err) {
+                        $ngBootbox.alert(data.msg);
+                        return;
+                    }
+                    $scope.search._id = data.blog._id;
+                    $scope.search.title = data.blog.title;
+                    $scope.search.content = data.blog.content;
+              })
+        }
+
+        $scope.getblog();
+
+        $scope.update = function () {
+            $ngBootbox.confirm("确定更新?").then(function () {
+                blogS.updateBlog($scope.search).then(function (data) {
                     if (data.err) {
                         $ngBootbox.alert(data.msg);
                         return;

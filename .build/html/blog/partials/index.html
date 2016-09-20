@@ -1,12 +1,13 @@
 <div id="contain" class="container">
 <div ng-repeat="blog in blogs">
-<h3>{{blog.title}}</h3>
+<h5>{{blog.title}}</h5>
   <div class="collapse navbar-collapse" id="navbar-collapse-5">
  <ul class="nav navbar-nav">
             <li><a href="#" ng-click="delete(this)">删除</a></li>
-            <li><a href="/blog#/updateBlog/{{blog}}">更新</a></li>
-            <li ><a>作者: Tim</a></li>
+            <li><a href="#/updateBlog/{{blog._id}}">更新</a></li>
             <li><a href="#">标签</a></li>
+            <li ><a>作者: Tim</a></li>
+            <li ><a>发布时间: {{blog.createdAt | date: "yyyy-MM-dd"}}</a></li>
            </ul>
   </div>
 <hr>

@@ -29,6 +29,9 @@ blogServices.factory('blogS', ['$http', function ($http) {
         updateBlog: function (obj) {
             return $http.post(HOST + 'updateBlog',obj).then(responseSuccess, responseError);
         },
+         getBlog: function (_id) {
+            return $http.get(HOST + 'getBlog?_id=' + _id).then(responseSuccess, responseError);
+        },
 
     }
 }])

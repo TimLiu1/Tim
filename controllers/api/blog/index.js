@@ -36,6 +36,26 @@ module.exports = function (app) {
         })
     })
 
+    //查询指定blog
+    app.get('/getBlog',function(req,res,next){
+        logger.info('查询指定blog');
+        let _id = req.query._id;
+        blog.findById(_id).exec().then((result) => {
+            return result;
+        }).then((result) => {
+            let model = {
+                code:'000',
+                blog:result,
+            }
+            res.json(model)
+        }).catch((err) => {
+            res.json({code:'999',msg:'查询数据库出错'+err});
+        })
+    })
+
+
+
+    //查询blog列表
     app.get('/blogList',function(req,res,next){
         logger.info('---查询博客列表----');
         blog.find({},function(err,blogs){
@@ -54,6 +74,8 @@ module.exports = function (app) {
             res.json(model)
         })
     })
+
+        //删除blog
       app.get('/deleteBlog',function(req,res,next){
           var _id = req.query._id;
         logger.info('删除博客'+_id);
@@ -70,10 +92,12 @@ module.exports = function (app) {
         })
     })
 
+
+
      app.post('/updateBlog',function(req,res,next){
          var contentJson = {};
          let title = req.body.title;
-         let content = req.body.coontent;
+         let content = req.body.content;
          if(title){
              contentJson.title = title;
          }
@@ -84,7 +108,7 @@ module.exports = function (app) {
           var _id = req.body._id;
 
         logger.info('更新博客'+_id);
-        blog.update({_id:_id},{$push:contentJson},function(err){
+        blog.update({_id:_id},{$set:contentJson},function(err){
             if(err){
                logger.info("更新数据库出错"+err);
                 res.json({code:'999',msg:'更新数据库失败'+err})
@@ -96,5 +120,7 @@ module.exports = function (app) {
             res.json(model)
         })
     })
+
+
 
 }
