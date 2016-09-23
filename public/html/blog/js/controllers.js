@@ -115,6 +115,16 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         }
 
         $scope.getblog();
+        
+         setInterval(function () {
+            blogS.exchangeTitle($scope.search).then(function (data) {
+                if(data.err){
+                    $ngBootbox.alert(data.msg)
+                }
+                console.log(data.content)
+                $scope.contentC = data.content
+            })
+        }, 9000)
 
         $scope.update = function () {
             $ngBootbox.confirm("确定更新?").then(function () {
