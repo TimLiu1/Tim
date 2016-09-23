@@ -3,7 +3,6 @@
 var express = require('express');
 var kraken = require('kraken-js');
 
-
 var options, app;
 
 
@@ -16,3 +15,8 @@ app.on('start', function () {
     console.log('Environment: %s', app.kraken.get('env:env'));
     console.log(app.settings.env)
 });
+
+
+
+
+

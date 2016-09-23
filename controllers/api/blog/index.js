@@ -1,13 +1,25 @@
 'use strict'
 
 let Promise = require('bluebird');
+let cors = require('cors');
 let markdown = require('markdown').markdown;
+let marked = require('marked');
 let logger = require('log4js').getLogger('tim');
 let blog = require('../../../models/blog/Blog');
 
-
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: true,
+  pedantic: false,
+  sanitize: false,
+  smartLists: false,
+  smartypants: false
+});
 
 module.exports = function (app) {
+    app.options('*',cors())
     //发布博文
     app.post('/blog', function (req, res,next) {
         console.log('发布文章')
@@ -30,7 +42,7 @@ module.exports = function (app) {
             if(err){
                 next()
             }
-            console.log(result);
+            // console.log(result);
             res.json(result);
             
         })
@@ -64,7 +76,7 @@ module.exports = function (app) {
                 res.json({code:'999',msg:'查询数据库失败'+err})
             }
             blogs.forEach((e) => {
-                e.content = markdown.toHTML(e.content);
+                e.content = marked(e.content);
             });
             var model = {
                 blogs:blogs
@@ -121,6 +133,20 @@ module.exports = function (app) {
         })
     })
 
+//markdown语法转换器
+app.post('/exchangeTitle', function(req,res,next){
+    console.log(req.body.content);
+    let content = "结果......";
+    if(req.body.content){
+        content = req.body.content
+    }
+  content =  marked(content);
+    let model = {
+        code: '000',
+        content:content
+    };
+    res.json(model);
 
+})
 
 }

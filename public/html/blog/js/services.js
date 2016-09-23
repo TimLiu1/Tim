@@ -32,6 +32,9 @@ blogServices.factory('blogS', ['$http', function ($http) {
          getBlog: function (_id) {
             return $http.get(HOST + 'getBlog?_id=' + _id).then(responseSuccess, responseError);
         },
+         exchangeTitle: function (obj) {
+            return $http.post(HOST + 'exchangeTitle',obj).then(responseSuccess, responseError);
+        },
 
     }
 }])

@@ -13,6 +13,7 @@
     <link href="/css/blog.css" rel="stylesheet">
     <link href="/css/demo.css" rel="stylesheet">
     <link href="/css/wangEditor.min.css" rel="stylesheet">
+    <link href="/html/blog/css/style.css" rel="stylesheet">
         <link rel="shortcut icon" href="/img/favicon.ico">
 
 
@@ -38,6 +39,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/flat-ui.min.js"></script>
 <script src="/js/application.js"></script>
+<!--<script src="/socket.io/socket.io.js"></script>-->
  <!--<script src="/js/wangEditor.min.js"></script>-->
 <script src="/js/video.js"></script>
  <script src="/js/bootbox.min.js"></script>

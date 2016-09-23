@@ -42,8 +42,8 @@ var blogControllers = angular.module('blogControllers', []);
 //     }]);
 
 //发布博文
-blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window','$location',
-    function ($scope, blogS, $ngBootbox, $window,$location) {
+blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location',
+    function ($scope, blogS, $ngBootbox, $window, $location) {
         $scope.search = {};
         $scope.postBlog = function () {
             blogS.postBlog($scope.search).then(function (data) {
@@ -55,6 +55,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
                 $location.url('/index')
             })
         }
+        //    $scope.contentC = marked($scope.search.content);
         $scope.getBlogList = function () {
             blogS.getBlogList().then(function (data) {
                 if (data.err) {
@@ -67,7 +68,15 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
         }
         $scope.getBlogList();
-
+        setInterval(function () {
+            blogS.exchangeTitle($scope.search).then(function (data) {
+                if(data.err){
+                    $ngBootbox.alert(data.msg)
+                }
+                console.log(data.content)
+                $scope.contentC = data.content
+            })
+        }, 9000)
         //删除blog
         $scope.delete = function (blog) {
             $ngBootbox.confirm("你确定删除" + blog.blog.title).then(function () {
@@ -87,22 +96,22 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
     }])
 
 
-    blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window','$location', '$routeParams',
-    function ($scope, blogS, $ngBootbox, $window,$location, $routeParams) {
+blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams',
+    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams) {
         $scope.search = {};
-      $scope._id = $routeParams._id;
-        
+        $scope._id = $routeParams._id;
+
         //更新blog 
-        $scope.getblog = function(){
-              blogS.getBlog($scope._id).then(function(data){
-                   if (data.err) {
-                        $ngBootbox.alert(data.msg);
-                        return;
-                    }
-                    $scope.search._id = data.blog._id;
-                    $scope.search.title = data.blog.title;
-                    $scope.search.content = data.blog.content;
-              })
+        $scope.getblog = function () {
+            blogS.getBlog($scope._id).then(function (data) {
+                if (data.err) {
+                    $ngBootbox.alert(data.msg);
+                    return;
+                }
+                $scope.search._id = data.blog._id;
+                $scope.search.title = data.blog.title;
+                $scope.search.content = data.blog.content;
+            })
         }
 
         $scope.getblog();

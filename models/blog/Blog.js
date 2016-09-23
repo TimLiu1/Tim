@@ -4,21 +4,26 @@ let updatedTimestamp = require('mongoose-updated_at');
 let mongoosePaginate = require('mongoose-paginate');
 
 let blogShema = new mongoose.Schema({
+    // 作者
+    author: {
+        type: String,
+        default: 'Tim'
+    },
     // 标题
-    title:String,
+    title: String,
     //正文
-    content:String,
+    content: String,
     //标签
-    label:[],
+    label: [],
     //创建日期
-    createdAt:{
-        type:Date,
-        default:Date.now
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 
-},{collection:'blog'});
+}, { collection: 'blog' });
 
 blogShema.plugin(updatedTimestamp);
 blogShema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('blogShema',blogShema);
+module.exports = mongoose.model('blogShema', blogShema);
