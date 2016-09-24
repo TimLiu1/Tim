@@ -1,26 +1,18 @@
-<div id="contain" class="container">
-<div ng-repeat="blog in blogs">
-<h5>{{blog.title}}</h5>
-  <div class="collapse navbar-collapse" id="navbar-collapse-5">
- <ul class="nav navbar-nav">
-            <li><a href="#" ng-click="delete(this)">删除</a></li>
-            <li><a href="#/updateBlog/{{blog._id}}">更新</a></li>
-            <li><a href="#">标签</a></li>
-            <li ><a>作者: Tim</a></li>
-            <li ><a>发布时间: {{blog.createdAt | date: "yyyy-MM-dd"}}</a></li>
-           </ul>
-  </div>
-<hr>
-<p ng-bind-html="blog.content | trust""></p>
+<div id = "contain" class="container">
+	<div class="row clearfix"  ng-repeat= "blogs1 in blogs">
+		<div class="col-md-6 column" ng-repeat="blog in blogs1">
+			<h2>
+				{{blog.title}}
+			</h2>
+			<p>{{blog.content}}</p>
+
+			<p>
+				 <a class="btn" href="#/blogDetail/{{blog._id}}/1"  >more »</a>
+			</p>
+		</div>
+	</div>
+	<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
+    class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+    boundary-links="true" ng-change="getBlogList()"></uib-pagination>
 </div>
-</div>
 
-
-
-
-
-    <!--<script>
-        $(function(){
-      videojs.options.flash.swf = "dist/js/vendors/video-js.swf" 
-        });
-    </script>-->

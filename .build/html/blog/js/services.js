@@ -21,7 +21,7 @@ blogServices.factory('blogS', ['$http', function ($http) {
             return $http.post(HOST + 'blog', blog).then(responseSuccess, responseError);
         },
         getBlogList: function (blog) {
-            return $http.get(HOST + 'blogList').then(responseSuccess, responseError);
+            return $http.post(HOST + 'blogList',blog).then(responseSuccess, responseError);
         },
         deleteBlog: function (id) {
             return $http.get(HOST + 'deleteBlog?_id=' + id).then(responseSuccess, responseError);
@@ -29,8 +29,8 @@ blogServices.factory('blogS', ['$http', function ($http) {
         updateBlog: function (obj) {
             return $http.post(HOST + 'updateBlog',obj).then(responseSuccess, responseError);
         },
-         getBlog: function (_id) {
-            return $http.get(HOST + 'getBlog?_id=' + _id).then(responseSuccess, responseError);
+         getBlog: function (_id,flag) {
+            return $http.get(HOST + 'getBlog?_id=' + _id+'&flag='+flag).then(responseSuccess, responseError);
         },
          exchangeTitle: function (obj) {
             return $http.post(HOST + 'exchangeTitle',obj).then(responseSuccess, responseError);

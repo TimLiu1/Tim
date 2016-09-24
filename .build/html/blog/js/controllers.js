@@ -42,10 +42,17 @@ var blogControllers = angular.module('blogControllers', []);
 //     }]);
 
 //发布博文
-blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location',
-    function ($scope, blogS, $ngBootbox, $window, $location) {
+blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location','$routeParams',
+    function ($scope, blogS, $ngBootbox, $window, $location,$routeParams) {
         $scope.search = {};
+        $scope._id = $routeParams._id;
+        $scope.flag = $routeParams.flag;
+        $scope.currentPage = 1;
         $scope.postBlog = function () {
+            if(!$scope.search.title || !$scope.search.content){
+                $ngBootbox.alert('标题和内容必须输入');
+                return;
+            }
             blogS.postBlog($scope.search).then(function (data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
@@ -57,12 +64,16 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         }
         //    $scope.contentC = marked($scope.search.content);
         $scope.getBlogList = function () {
-            blogS.getBlogList().then(function (data) {
+            console.log($scope.currentPage);
+            $scope.search.currentPage = $scope.currentPage;
+            blogS.getBlogList($scope.search).then(function (data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
                     return;
                 }
                 console.log(data)
+                $scope.pageSize = 10;
+                $scope.totalItems = data.total;
                 $scope.blogs = data.blogs
             })
 
@@ -70,18 +81,34 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         $scope.getBlogList();
         setInterval(function () {
             blogS.exchangeTitle($scope.search).then(function (data) {
-                if(data.err){
+                if (data.err) {
                     $ngBootbox.alert(data.msg)
                 }
                 console.log(data.content)
                 $scope.contentC = data.content
             })
         }, 9000)
+
+        //取得指定blog
+        $scope.getblog = function () {
+            blogS.getBlog($scope._id, $scope.flag).then(function (data) {
+                if (data.err) {
+                    $ngBootbox.alert(data.msg);
+                    return;
+                }
+                console.log(data);
+                $scope.blog= data.blog
+            })
+        }
+       if($scope.flag){
+        $scope.getblog();
+       }
+
+
         //删除blog
-        $scope.delete = function (blog) {
-            $ngBootbox.confirm("你确定删除" + blog.blog.title).then(function () {
-                var _id = blog.blog._id
-                blogS.deleteBlog(_id).then(function (data) {
+        $scope.delete = function () {
+            $ngBootbox.confirm("你确定删除" +$scope.search.title).then(function () {
+                blogS.deleteBlog($scope._id).then(function (data) {
                     if (data.err) {
                         $ngBootbox.alert(data.msg);
                         return;
@@ -100,14 +127,16 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
     function ($scope, blogS, $ngBootbox, $window, $location, $routeParams) {
         $scope.search = {};
         $scope._id = $routeParams._id;
+        $scope.flag = $routeParams.flag;
 
         //更新blog 
         $scope.getblog = function () {
-            blogS.getBlog($scope._id).then(function (data) {
+            blogS.getBlog($scope._id, $scope.flag).then(function (data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
                     return;
                 }
+                console.log(data);
                 $scope.search._id = data.blog._id;
                 $scope.search.title = data.blog.title;
                 $scope.search.content = data.blog.content;
@@ -115,10 +144,11 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         }
 
         $scope.getblog();
-        
-         setInterval(function () {
+
+        setInterval(function () {
+            console.log($scope.search);
             blogS.exchangeTitle($scope.search).then(function (data) {
-                if(data.err){
+                if (data.err) {
                     $ngBootbox.alert(data.msg)
                 }
                 console.log(data.content)
