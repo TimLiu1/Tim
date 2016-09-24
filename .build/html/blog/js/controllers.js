@@ -42,14 +42,16 @@ var blogControllers = angular.module('blogControllers', []);
 //     }]);
 
 //发布博文
-blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location','$routeParams',
-    function ($scope, blogS, $ngBootbox, $window, $location,$routeParams) {
+blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams',
+    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams) {
         $scope.search = {};
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
         $scope.currentPage = 1;
+
+        //发布blog
         $scope.postBlog = function () {
-            if(!$scope.search.title || !$scope.search.content){
+            if (!$scope.search.title || !$scope.search.content) {
                 $ngBootbox.alert('标题和内容必须输入');
                 return;
             }
@@ -62,7 +64,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
                 $location.url('/index')
             })
         }
-        //    $scope.contentC = marked($scope.search.content);
+        //   获取blog列表
         $scope.getBlogList = function () {
             console.log($scope.currentPage);
             $scope.search.currentPage = $scope.currentPage;
@@ -79,6 +81,8 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
         }
         $scope.getBlogList();
+
+        //自动定时任务
         setInterval(function () {
             blogS.exchangeTitle($scope.search).then(function (data) {
                 if (data.err) {
@@ -97,17 +101,17 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
                     return;
                 }
                 console.log(data);
-                $scope.blog= data.blog
+                $scope.blog = data.blog
             })
         }
-       if($scope.flag){
-        $scope.getblog();
-       }
+        if ($scope.flag) {
+            $scope.getblog();
+        }
 
 
         //删除blog
         $scope.delete = function () {
-            $ngBootbox.confirm("你确定删除" +$scope.search.title).then(function () {
+            $ngBootbox.confirm("你确定删除" + $scope.search.title).then(function () {
                 blogS.deleteBlog($scope._id).then(function (data) {
                     if (data.err) {
                         $ngBootbox.alert(data.msg);
@@ -123,6 +127,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
     }])
 
 
+//更新blog控制器
 blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams',
     function ($scope, blogS, $ngBootbox, $window, $location, $routeParams) {
         $scope.search = {};
