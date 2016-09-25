@@ -7,6 +7,7 @@ let cors = require('cors');
 let markdown = require('markdown').markdown;
 let marked = require('marked');
 let logger = require('log4js').getLogger('tim');
+let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
 
 marked.setOptions({
@@ -17,7 +18,10 @@ marked.setOptions({
     pedantic: false,
     sanitize: false,
     smartLists: false,
-    smartypants: false
+    smartypants: false,
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value;
+    }
 });
 
 module.exports = function (app) {
@@ -61,10 +65,13 @@ module.exports = function (app) {
             if (req.query.flag && req.query.flag == '1') {
                 result.content = marked(result.content);
             }
+            console.log(result);
+            
             let model = {
                 code: '000',
                 blog: result,
             }
+        console.log(model);
             res.json(model)
         }).catch((err) => {
             res.json({ code: '999', msg: '查询数据库出错' + err });

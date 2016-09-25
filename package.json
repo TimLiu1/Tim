@@ -18,6 +18,8 @@
     "cors": "^2.8.1",
     "eslint": "^1.10.3",
     "express": "^4.12.2",
+    "highlight": "^0.2.4",
+    "highlight.js": "^9.7.0",
     "jsonwebtoken": "^7.1.9",
     "kraken-js": "^2.0.0",
     "log4js": "^0.6.38",
