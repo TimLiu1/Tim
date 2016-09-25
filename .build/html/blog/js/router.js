@@ -22,6 +22,10 @@ router.config(['$routeProvider',
                 templateUrl: '/html/blog/partials/checkDialog.html',
                 controller: 'BlogCtrl'
             }).
+            when('/login',{
+                templateUrl:'/html/blog/partials/login.html',
+                controller:'MainCtrl'
+            }).
             otherwise({
                 redirectTo: '/index'
             });

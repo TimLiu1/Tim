@@ -3,3 +3,31 @@
     text-align: center;
     font-size: 12px;
 }
+.login-screen-padding{
+    padding: 123px 199px 33px 195px;
+}
+.login_input{
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    padding-bottom: 11px;
+    padding-top: 11px;
+    width: 312px;
+    padding: 8px 0 9px 10px;
+    text-indent: 1px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none; 
+}
+.footer-box{
+    text-align: center;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.24);
+    padding: 4px;
+    min-height: 100px;
+    margin-top:20px;
+}
