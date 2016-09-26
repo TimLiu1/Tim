@@ -192,6 +192,7 @@ function($scope,UM,$ngBootbox,storage,Auth,$location){
              return;
          } 
          Auth.setToken(data.data.user.token);
+         Auth.setUser(data.data.user);
          $ngBootbox.alert('登录成功');
          $location.url('/index');
          

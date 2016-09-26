@@ -17,8 +17,8 @@ sysServices.factory('storage', ['$window', function ($window) {
             }
         },
         local: {
-            setObject: function (key, value) {
-                $window.localStorage.setItem(key, angular.toJson(obj));
+            setObject: function (key, obj) {
+                $window.localStorage.setItem(key, angular.fromJson(obj));
             },
             getObject: function (key) {
                 return angular.fromJson($window.localStorage.getItem(key));

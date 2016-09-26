@@ -69,7 +69,7 @@ module.exports = function (app) {
                 return;
                 }
                 if (!user) {
-                    res.json({ code: '999', msg: '用户名不存在' })
+                    res.json({ code: '999', msg: '密码错误' })
                 return;
                 }
                 let model = {
