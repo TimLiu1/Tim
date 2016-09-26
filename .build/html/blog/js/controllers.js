@@ -177,3 +177,38 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         }
 
     }])
+
+
+
+
+//登陆控制器
+blogControllers.controller('LoginCtrl',['$scope','UM','$ngBootbox','storage','Auth','$location',
+function($scope,UM,$ngBootbox,storage,Auth,$location){
+  $scope.search = {};
+  $scope.login = function(){
+      UM.login($scope.search.username,$scope.search.password).then(function(data){
+         if(data.code == '999'){
+             $ngBootbox.alert(data.msg)
+             return;
+         } 
+         Auth.setToken(data.data.user.token);
+         $ngBootbox.alert('登录成功');
+         $location.url('/index');
+         
+      })
+  }
+
+}])
+
+
+//登出控制器
+blogControllers.controller('LogoutCtrl',['$scope','UM','$ngBootbox','storage','Auth',
+function($scope,UM,$ngBootbox,storage,Auth){
+  $scope.search = {};
+  $scope.logout = function(){
+   Auth.logout();
+   $ngBootbox.alert('登出成功')
+  }
+  $scope.logout();
+
+}])

@@ -7,5 +7,11 @@ var blogApp = angular.module('blogApp', [
     'blogServices',
     'blogFilters',
     'blogControllers',
-    'commonDirectives'
-])
+    'commonDirectives',
+    'sysServices',
+]);
+
+blogApp.config(['$compileProvider','$httpProvider','$locationProvider',
+function($compileProvider,$httpProvider,$locationProvider){
+    $httpProvider.interceptors.push('authInterceptor');
+}])

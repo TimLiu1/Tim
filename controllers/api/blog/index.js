@@ -9,6 +9,7 @@ let marked = require('marked');
 let logger = require('log4js').getLogger('tim');
 let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
+let Auth = require('../../../lib/auth');
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -29,6 +30,7 @@ module.exports = function (app) {
     //发布博文
     app.post('/blog', function (req, res, next) {
         console.log('发布文章')
+        console.log(req.headers);
         let articleJson = {};
         let title = req.body.title;
         let content = req.body.content;
@@ -81,7 +83,7 @@ module.exports = function (app) {
 
 
     //查询blog列表
-    app.post('/blogList', function (req, res, next) {
+    app.post('/blogList', Auth.isAuthenticated(), function (req, res, next) {
         logger.info('查询指定blog列表')
         let conditionPage = {}
         let LIMIT = 10;

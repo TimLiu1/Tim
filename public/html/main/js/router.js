@@ -9,7 +9,11 @@ router.config(['$routeProvider',
              when('/message', {
                 templateUrl: '/html/main/partials/message.html',
                 controller: 'MainCtrl'
-            }).          
+            }). 
+             when('/login',{
+                templateUrl:'/html/main/partials/login.html',
+                controller:'LoginCtrl'
+            }).         
             otherwise({
                 redirectTo: '/overview'
             });

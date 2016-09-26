@@ -24,7 +24,11 @@ router.config(['$routeProvider',
             }).
             when('/login',{
                 templateUrl:'/html/blog/partials/login.html',
-                controller:'MainCtrl'
+                controller:'LoginCtrl'
+            }).
+             when('/logout',{
+                templateUrl:'/html/blog/partials/login.html',
+                controller:'LogoutCtrl'
             }).
             otherwise({
                 redirectTo: '/index'

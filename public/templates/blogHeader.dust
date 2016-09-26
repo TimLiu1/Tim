@@ -24,6 +24,9 @@
               </div>
             </div>
           </form>
+           <ul class="nav navbar-nav navbar-right">
+            <li><a href="/blog#/logout">登出</a></li>
+           </ul>
        
         </div><!-- /.navbar-collapse -->
       </nav>
