@@ -9,24 +9,39 @@
     <title>Tim's web</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/flat.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/nivo-lightbox.css" rel="stylesheet" />
+    <link href="/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="/css/animations.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/default.css" rel="stylesheet">
 </head>
 
 <body ng-app="mainApp">
 
 </body>
 <div class="container-fluid view-container">
-      {>"header" /}
+
     <div ng-view class="view-frame">
     </div>
 </div>
 
 <script src="/js/angular.min.js"></script>
-    <!--<script src="/js/angular-animate.min.js"></script>-->
+<!--<script src="/js/angular-animate.min.js"></script>-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.sticky.js"></script>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.scrollTo.js"></script>
+<script src="/js/jquery.appear.js"></script>
+<script src="/js/stellar.js"></script>
+<script src="/js/nivo-lightbox.min.js"></script>
+
+<script src="js/custom.js"></script>
+<script src="js/css3-animate-it.js"></script>
+
 <script src="/js/angular-route.min.js"></script>
 <script src="/js/ui-bootstrap-tpls.min.js"></script>
-<script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/html/js/directives.js"></script>
 <script src="/html/js/services.js"></script>
