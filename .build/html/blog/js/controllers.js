@@ -108,13 +108,13 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         //     })
         // }, 9000)
 
-        // blogS.exchangeTitle($scope.search).then(function (data) {
-        //     if (data.err) {
-        //         $ngBootbox.alert(data.msg)
-        //     }
-        //     console.log(data.content)
-        //     $scope.contentC = data.content
-        // })
+        blogS.exchangeTitle($scope.search).then(function (data) {
+            if (data.err) {
+                $ngBootbox.alert(data.msg)
+            }
+            console.log(data.content)
+            $scope.contentC = data.content
+        })
 
         //取得指定blog
         $scope.getblog = function () {
