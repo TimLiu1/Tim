@@ -49,6 +49,21 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         $scope.flag = $routeParams.flag;
         $scope.currentPage = 1;
 
+
+        //socket.io实时更新
+        var socket = io('http://localhost:8000');
+        socket.on('contentS', function (data) {
+            console.log('--------->')
+            console.log(data);
+            $scope.contentC = data;
+             });
+            $scope.change = function(){
+            socket.emit('contentC', $scope.search.content);
+            }
+       
+
+
+
         //发布blog
         $scope.postBlog = function () {
             if (!$scope.search.title || !$scope.search.content) {
@@ -83,15 +98,23 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         $scope.getBlogList();
 
         //自动定时任务
-        setInterval(function () {
-            blogS.exchangeTitle($scope.search).then(function (data) {
-                if (data.err) {
-                    $ngBootbox.alert(data.msg)
-                }
-                console.log(data.content)
-                $scope.contentC = data.content
-            })
-        }, 9000)
+        // setInterval(function () {
+        //     blogS.exchangeTitle($scope.search).then(function (data) {
+        //         if (data.err) {
+        //             $ngBootbox.alert(data.msg)
+        //         }
+        //         console.log(data.content)
+        //         $scope.contentC = data.content
+        //     })
+        // }, 9000)
+
+        // blogS.exchangeTitle($scope.search).then(function (data) {
+        //     if (data.err) {
+        //         $ngBootbox.alert(data.msg)
+        //     }
+        //     console.log(data.content)
+        //     $scope.contentC = data.content
+        // })
 
         //取得指定blog
         $scope.getblog = function () {
@@ -182,34 +205,34 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
 
 
 //登陆控制器
-blogControllers.controller('LoginCtrl',['$scope','UM','$ngBootbox','storage','Auth','$location',
-function($scope,UM,$ngBootbox,storage,Auth,$location){
-  $scope.search = {};
-  $scope.login = function(){
-      UM.login($scope.search.username,$scope.search.password).then(function(data){
-         if(data.code == '999'){
-             $ngBootbox.alert(data.msg)
-             return;
-         } 
-         Auth.setToken(data.data.user.token);
-         Auth.setUser(data.data.user);
-         $ngBootbox.alert('登录成功');
-         $location.url('/index');
-         
-      })
-  }
+blogControllers.controller('LoginCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth', '$location',
+    function ($scope, UM, $ngBootbox, storage, Auth, $location) {
+        $scope.search = {};
+        $scope.login = function () {
+            UM.login($scope.search.username, $scope.search.password).then(function (data) {
+                if (data.code == '999') {
+                    $ngBootbox.alert(data.msg)
+                    return;
+                }
+                Auth.setToken(data.data.user.token);
+                Auth.setUser(data.data.user);
+                $ngBootbox.alert('登录成功');
+                $location.url('/index');
 
-}])
+            })
+        }
+
+    }])
 
 
 //登出控制器
-blogControllers.controller('LogoutCtrl',['$scope','UM','$ngBootbox','storage','Auth',
-function($scope,UM,$ngBootbox,storage,Auth){
-  $scope.search = {};
-  $scope.logout = function(){
-   Auth.logout();
-   $ngBootbox.alert('登出成功')
-  }
-  $scope.logout();
+blogControllers.controller('LogoutCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth',
+    function ($scope, UM, $ngBootbox, storage, Auth) {
+        $scope.search = {};
+        $scope.logout = function () {
+            Auth.logout();
+            $ngBootbox.alert('登出成功')
+        }
+        $scope.logout();
 
-}])
+    }])

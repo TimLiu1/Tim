@@ -10,6 +10,7 @@ let logger = require('log4js').getLogger('tim');
 let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
 let Auth = require('../../../lib/auth');
+let SIO = require('../../../lib/SIO');
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -21,7 +22,7 @@ marked.setOptions({
     smartLists: false,
     smartypants: false,
     highlight: function (code) {
-      return hljs.highlightAuto(code).value;
+        return hljs.highlightAuto(code).value;
     }
 });
 
@@ -68,12 +69,12 @@ module.exports = function (app) {
                 result.content = marked(result.content);
             }
             console.log(result);
-            
+
             let model = {
                 code: '000',
                 blog: result,
             }
-        console.log(model);
+            console.log(model);
             res.json(model)
         }).catch((err) => {
             res.json({ code: '999', msg: '查询数据库出错' + err });
@@ -179,10 +180,22 @@ module.exports = function (app) {
     //markdown语法转换器
     app.post('/exchangeTitle', function (req, res, next) {
         let content = "解析......";
+        console.log('解析')
         if (req.body.content) {
             content = req.body.content
         }
-        content = marked(content);
+            console.log('------->')
+            //  SIO.io.on('contentC', function (data) {
+            //      console.log(data);
+            //      content = marked(content);
+            // });
+            // console.log('------')
+            // SIO.io.emit('contentS',content);
+            //console.log('/bluewhale');
+            //此处可获取客户端的cookie，在socket.handshake中，用于定位连接的客户端
+
+
+        // content = marked(content);
         let model = {
             code: '000',
             content: content
@@ -192,3 +205,5 @@ module.exports = function (app) {
     })
 
 }
+
+

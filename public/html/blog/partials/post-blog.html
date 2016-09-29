@@ -17,13 +17,13 @@
       </div>
       <div class="form-group">
         <div class="col-sm-6">
-          <textarea rows=20 cols=15 ng-model="search.content" class="form-control"></textarea>
+          <textarea rows=20 cols=15 ng-model="search.content" ng-change="change()"  class="form-control"></textarea>
           <div style="margin-top:20px" class="col-sm-12">
-            <button ng-click="postBlog()" type="button " class="btn btn-primary btn-lg btn-block">发布</button>
+            <button ng-click="postBlog()" type="button"  class="btn btn-primary btn-lg btn-block">发布</button>
           </div>
         </div>
         <div class="col-sm-6">
-          <p style="text-align:left"  ng-bind-html="contentC | trust">
+          <p style="text-align:left"   ng-bind-html="contentC | trust">
             </textarea>
         </div>
       </div>    
