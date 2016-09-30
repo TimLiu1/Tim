@@ -51,7 +51,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
 
         //socket.io实时更新
-        var socket = io('http://localhost:8000');
+        var socket = io('http://115.159.52.72:8000');
         socket.on('contentS', function (data) {
             console.log('--------->')
             console.log(data);
@@ -108,13 +108,13 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         //     })
         // }, 9000)
 
-        blogS.exchangeTitle($scope.search).then(function (data) {
-            if (data.err) {
-                $ngBootbox.alert(data.msg)
-            }
-            console.log(data.content)
-            $scope.contentC = data.content
-        })
+        // blogS.exchangeTitle($scope.search).then(function (data) {
+        //     if (data.err) {
+        //         $ngBootbox.alert(data.msg)
+        //     }
+        //     console.log(data.content)
+        //     $scope.contentC = data.content
+        // })
 
         //取得指定blog
         $scope.getblog = function () {
