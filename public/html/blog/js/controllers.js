@@ -42,8 +42,8 @@ var blogControllers = angular.module('blogControllers', []);
 //     }]);
 
 //发布博文
-blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams',
-    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams) {
+blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
+    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
         $scope.search = {};
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
@@ -51,16 +51,16 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
 
         //socket.io实时更新
-        var socket = io('http://115.159.52.72:8000');
-        socket.on('contentS', function (data) {
+        $rootScope.socket = io('http://115.159.52.72:8000');
+        $rootScope.socket.on('contentS', function (data) {
             console.log('--------->')
             console.log(data);
             $scope.contentC = data;
-             });
-            $scope.change = function(){
-            socket.emit('contentC', $scope.search.content);
-            }
-       
+        });
+        $scope.change = function () {
+            $rootScope.socket.emit('contentC', $scope.search.content);
+        }
+
 
 
 
@@ -151,8 +151,8 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
 
 //更新blog控制器
-blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams',
-    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams) {
+blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
+    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
         $scope.search = {};
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
@@ -172,17 +172,27 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         }
 
         $scope.getblog();
+        
+        $rootScope.socket = io('http://115.159.52.72:8000');
+        $rootScope.socket.on('contentS', function (data) {
+            console.log('--------->')
+            console.log(data);
+            $scope.contentC = data;
+        });
+        $scope.change = function () {
+            $rootScope.socket.emit('contentC', $scope.search.content);
+        }
 
-        setInterval(function () {
-            console.log($scope.search);
-            blogS.exchangeTitle($scope.search).then(function (data) {
-                if (data.err) {
-                    $ngBootbox.alert(data.msg)
-                }
-                console.log(data.content)
-                $scope.contentC = data.content
-            })
-        }, 9000)
+        // setInterval(function () {
+        //     console.log($scope.search);
+        //     blogS.exchangeTitle($scope.search).then(function (data) {
+        //         if (data.err) {
+        //             $ngBootbox.alert(data.msg)
+        //         }
+        //         console.log(data.content)
+        //         $scope.contentC = data.content
+        //     })
+        // }, 9000)
 
         $scope.update = function () {
             $ngBootbox.confirm("确定更新?").then(function () {
