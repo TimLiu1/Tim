@@ -51,7 +51,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
 
         //socket.io实时更新
-        $rootScope.socket = io('http://115.159.52.72:8000');
+        $rootScope.socket = io('http://115.159.146.35:8000');
         $rootScope.socket.on('contentS', function (data) {
             console.log('--------->')
             console.log(data);
