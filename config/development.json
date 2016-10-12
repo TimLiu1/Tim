@@ -8,7 +8,7 @@
 
       "databaseConfig": {
         // "host": "localhost"
-        "host": "115.159.52.72",
+        "host": "115.159.146.35",
         "database": "Tim"
         // "options": {"user": "huibao", "pass": "1qaz2wsx"}
     },

@@ -134,17 +134,17 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 
         //删除blog
         $scope.delete = function () {
-            $ngBootbox.confirm("你确定删除" + $scope.search.title).then(function () {
+            $ngBootbox.confirm("你确定删除" + $scope.blog.title).then(function () {
                 blogS.deleteBlog($scope._id).then(function (data) {
                     if (data.err) {
                         $ngBootbox.alert(data.msg);
                         return;
                     }
                     $ngBootbox.alert(data.msg);
-                    $location.url('/');
+                    // $location.url('/');
                 })
             }, function () {
-
+                console.log('不删除');
             })
         }
     }])
