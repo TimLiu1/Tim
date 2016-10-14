@@ -48,37 +48,6 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
         $scope.currentPage = 1;
-
-
-        //socket.io实时更新
-        $rootScope.socket = io('http://115.159.146.35:8000');
-        $rootScope.socket.on('contentS', function (data) {
-            console.log('--------->')
-            console.log(data);
-            $scope.contentC = data;
-        });
-        $scope.change = function () {
-            $rootScope.socket.emit('contentC', $scope.search.content);
-        }
-
-
-
-
-        //发布blog
-        $scope.postBlog = function () {
-            if (!$scope.search.title || !$scope.search.content) {
-                $ngBootbox.alert('标题和内容必须输入');
-                return;
-            }
-            blogS.postBlog($scope.search).then(function (data) {
-                if (data.err) {
-                    $ngBootbox.alert(data.msg);
-                    return;
-                }
-                $ngBootbox.alert('发布成功');
-                $location.url('/index')
-            })
-        }
         //   获取blog列表
         $scope.getBlogList = function () {
             console.log($scope.currentPage);
@@ -97,25 +66,6 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         }
         $scope.getBlogList();
 
-        //自动定时任务
-        // setInterval(function () {
-        //     blogS.exchangeTitle($scope.search).then(function (data) {
-        //         if (data.err) {
-        //             $ngBootbox.alert(data.msg)
-        //         }
-        //         console.log(data.content)
-        //         $scope.contentC = data.content
-        //     })
-        // }, 9000)
-
-        // blogS.exchangeTitle($scope.search).then(function (data) {
-        //     if (data.err) {
-        //         $ngBootbox.alert(data.msg)
-        //     }
-        //     console.log(data.content)
-        //     $scope.contentC = data.content
-        // })
-
         //取得指定blog
         $scope.getblog = function () {
             blogS.getBlog($scope._id, $scope.flag).then(function (data) {
@@ -130,7 +80,6 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         if ($scope.flag) {
             $scope.getblog();
         }
-
 
         //删除blog
         $scope.delete = function () {
@@ -150,12 +99,49 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
     }])
 
 
+//发布blog控制器
+blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
+    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
+        $scope.search = {};
+        $scope._id = $routeParams._id;
+        $scope.flag = $routeParams.flag;
+        $scope.currentPage = 1;
+
+
+        //socket.io实时更新
+        $rootScope.socket = io('http://115.159.146.35:8000');
+        $rootScope.socket.on('contentS', function (data) {
+            console.log('--------->')
+            console.log(data);
+            $scope.contentC = data;
+        });
+        $scope.change = function () {
+            $rootScope.socket.emit('contentC', $scope.search.content);
+        }
+
+        //发布blog
+        $scope.postBlog = function () {
+            $scope.search.labels = $scope.search.labels.split(" ")
+            blogS.postBlog($scope.search).then(function (data) {
+                if (data.err) {
+                    $ngBootbox.alert(data.msg);
+                    return;
+                }
+                $ngBootbox.alert('发布成功');
+                $location.url('/index')
+            })
+        }
+
+    }])
+
+
 //更新blog控制器
 blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
     function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
         $scope.search = {};
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
+        console.log($scope.flag);
 
         //更新blog 
         $scope.getblog = function () {
@@ -167,15 +153,15 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
                 console.log(data);
                 $scope.search._id = data.blog._id;
                 $scope.search.title = data.blog.title;
+                $scope.search.labels = data.blog.labels.join(" ");
                 $scope.search.content = data.blog.content;
             })
         }
 
         $scope.getblog();
-        
+
         $rootScope.socket = io('http://115.159.146.35:8000');
         $rootScope.socket.on('contentS', function (data) {
-            console.log('--------->')
             console.log(data);
             $scope.contentC = data;
         });
@@ -195,6 +181,7 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         // }, 9000)
 
         $scope.update = function () {
+            $scope.search.labels = $scope.search.labels.split(" ")            
             $ngBootbox.confirm("确定更新?").then(function () {
                 blogS.updateBlog($scope.search).then(function (data) {
                     if (data.err) {

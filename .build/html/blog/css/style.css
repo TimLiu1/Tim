@@ -2,3 +2,11 @@ article code {
 white-space: normal;  
 word-break: break-all;  
 }
+
+.blog-small {
+    font-size: 10px;
+}
+.blog-lable {
+ margin-right: 5px;
+ font-size: 1px;
+}

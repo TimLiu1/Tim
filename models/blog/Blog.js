@@ -14,7 +14,7 @@ let blogShema = new mongoose.Schema({
     //正文
     content: String,
     //标签
-    label: [],
+    labels: [],
     //创建日期
     createdAt: {
         type: Date,

@@ -31,21 +31,7 @@ module.exports = function (app) {
     //发布博文
     app.post('/blog', function (req, res, next) {
         console.log('发布文章')
-        console.log(req.headers);
-        let articleJson = {};
-        let title = req.body.title;
-        let content = req.body.content;
-        let tag = req.body.tag;
-        if (title) {
-            articleJson.title = title
-        }
-        if (content) {
-            articleJson.content = content
-        }
-        if (tag) {
-            articleJson.tag = tag
-        }
-
+        let articleJson = req.body;
         let article = new blog(articleJson);
         article.save(function (err, result) {
             if (err) {
@@ -59,6 +45,7 @@ module.exports = function (app) {
 
     //查询指定blog
     app.get('/getBlog', function (req, res, next) {
+       
         logger.info('查询指定blog');
         let _id = req.query._id;
 
@@ -151,16 +138,7 @@ module.exports = function (app) {
 
     //更新blog
     app.post('/updateBlog', function (req, res, next) {
-        var contentJson = {};
-        let title = req.body.title;
-        let content = req.body.content;
-        if (title) {
-            contentJson.title = title;
-        }
-        if (content) {
-            contentJson.content = content;
-        }
-
+        var contentJson = req.body;
         var _id = req.body._id;
 
         logger.info('更新博客' + _id);

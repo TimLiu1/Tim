@@ -1,32 +1,36 @@
-
-
-
 <div class="panel panel-default" style="width:1000px;text-align: center;margin-left:200px">
-  <div class="panel-body">
-    <form class="form-horizontal" name="userForm" role="form">
-      <input type="hidden" name="_csrf" value="{_csrf}" ng-model="search._csrf" />
-      <div class="form-group">
-        <label class="col-sm-1 control-label">名称:<span class="required-indicator"  style="color:red">*</span></label>
-        <div class="col-sm-3">
-          <input type="text" name="title" class="form-control" ng-model="search.title" required />
-        </div>
+	<div class="panel-body">
+		<form class="form-horizontal" name="userForm" ng-submit="postBlog()" role="form">
+			<input type="hidden" name="_csrf" value="{_csrf}" ng-model="search._csrf" />
+			<div class="form-group">
+				<label class="col-sm-1 control-label">名称:<span class="required-indicator"  style="color:red">*</span></label>
+				<div class="col-sm-3">
+					<input type="text" name="title" class="form-control" ng-model="search.title" required />
+				</div>
 
-      </div>
-      <div class="form-group">
-        <label class="col-sm-1 control-label">正文:<span class="required-indicator" style="color:red">*</span></label>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-6">
-          <textarea rows=20 cols=15 ng-model="search.content" ng-change="change()"  class="form-control"></textarea>
-          <div style="margin-top:20px" class="col-sm-12">
-            <button ng-click="postBlog()" type="button"  class="btn btn-primary btn-lg btn-block">发布</button>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <p style="text-align:left"   ng-bind-html="contentC | trust">
-            </textarea>
-        </div>
-      </div>    
-    </form>
-    </div>
-  </div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-1 control-label">标签:<span class="required-indicator"  style="color:red">*</span></label>
+				<div class="col-sm-3">
+					<input type="text" name="tags" placeholder="标签间用空格隔开" class="form-control" ng-model="search.labels" required />			
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label class="col-sm-1 control-label">正文:<span class="required-indicator" style="color:red">*</span></label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-6">
+					<textarea rows=20 cols=15 ng-model="search.content" ng-change="change()" class="form-control"></textarea>
+					<div style="margin-top:20px" class="col-sm-12">
+						<button type="submit"" type="button" class="btn btn-primary btn-lg btn-block">发布</button>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<p style="text-align:left" ng-bind-html="contentC | trust">
+						</textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -8,7 +8,7 @@ router.config(['$routeProvider',
             }).
              when('/postBlog', {
                 templateUrl: '/html/blog/partials/post-blog.html',
-                controller: 'BlogCtrl'
+                controller: 'PostBlogCtrl'
             }).
              when('/blogDetail/:_id/:flag', {
                 templateUrl: '/html/blog/partials/blog_detail.html',

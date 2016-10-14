@@ -4,6 +4,8 @@
 			<h5>
 				{{blog.title}}
 			</h5>
+			<small class="blog-small">标签: </small><span ng-repeat="label in blog.labels"   class="label label-success blog-lable">{{label}}</span>
+			<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
 			<p>{{blog.content}}</p>
 
 			<p>
