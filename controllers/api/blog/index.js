@@ -91,26 +91,26 @@ module.exports = function (app) {
             }
             // console.log(blogs);
             blogs.docs.forEach((e) => {
-                e.content = (e.content).substring(0, 100);
+                e.content = (e.content).substring(0, 200);
             });
 
-            let blogC = [];
-            let detail = [];
-            blogs.docs.forEach((e, index) => {
-                detail.push(e);
-                if (detail.length == 2) {
-                    blogC.push(detail);
-                    detail = [];
-                }
-            });
-            detail = [];
-            if (blogs.docs.length % 2 != 0) {
-                console.log(blogs.docs[1]);
-                detail.push(blogs.docs[blogs.docs.length - 1]);
-                blogC.push(detail);
-            }
+            // let blogC = [];
+            // let detail = [];
+            // blogs.docs.forEach((e, index) => {
+            //     detail.push(e);
+            //     if (detail.length == 2) {
+            //         blogC.push(detail);
+            //         detail = [];
+            //     }
+            // });
+            // detail = [];
+            // if (blogs.docs.length % 2 != 0) {
+            //     console.log(blogs.docs[1]);
+            //     detail.push(blogs.docs[blogs.docs.length - 1]);
+            //     blogC.push(detail);
+            // }
             var model = {
-                blogs: blogC,
+                blogs: blogs,
                 total: blogs.total,
                 pages: blogs.pages,
             }

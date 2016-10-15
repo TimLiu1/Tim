@@ -60,7 +60,8 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
                 console.log(data)
                 $scope.pageSize = 10;
                 $scope.totalItems = data.total;
-                $scope.blogs = data.blogs
+                $scope.blogs = data.blogs.docs
+                console.log($scope.blogs);
             })
 
         }

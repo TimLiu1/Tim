@@ -1,12 +1,79 @@
+#contain{
+    background-color: #e7ecef;
+}
 article code {  
 white-space: normal;  
 word-break: break-all;  
 }
+.blog {
+    background-color: rgb(255, 255, 255);
+    padding: 40px 40px 30px;
+     border-radius: 2%;
+    margin-bottom: 20px;
+}
+.me {
+    width: 350px;
+    height: 350px;
+    border-radius: 2%;
+    background-color: rgb(255, 255, 255);
+    padding: 40px 30px 30px 30px;
+}
+.title_recent {
+    width: 350px;
+    border-radius: 2%;
+    background-color: rgb(255, 255, 255);
+}
+.title_recent h4{
+    line-height: 50px;
+}
+.title_recent h4 label{
+    padding-left: 20px;
+   font-size: 16px;
+    color: #333;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
 
+}
+.title_recent dl  {
+      padding-left: 20px;
+      border-top:1px #ccc solid;
+}
+.title_recent dl dt {
+    line-height: 25px;
+    font-size: 12px;
+  
+}
+
+
+.me_name {
+    text-align: center;
+    padding: 10px 0;
+}
+.me_intro {
+    padding-top: 10px;
+    line-height: 22px; 
+    border-top:1px #ccc dashed;
+    font-size: 14px;
+}
+img {
+    vertical-align: middle;
+}
+
+.blog-me {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    display: block;
+    margin:  auto;
+}
+img {
+    vertical-align: middle;
+}
 .blog-small {
-    font-size: 10px;
+    font-size: 12px;
 }
 .blog-lable {
  margin-right: 5px;
- font-size: 1px;
+ font-size: 10px;
 }

@@ -1,20 +1,53 @@
-<div id = "contain" class="container">
-	<div class="row clearfix"  ng-repeat= "blogs1 in blogs">
-		<div class="col-xs-12 col-sm-6 col-md-6  column" ng-repeat="blog in blogs1">
-			<h5>
-				{{blog.title}}
-			</h5>
-			<small class="blog-small">标签: </small><span ng-repeat="label in blog.labels"   class="label label-success blog-lable">{{label}}</span>
-			<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
-			<p>{{blog.content}}</p>
+<div id="contain" class="container">
+	<div class="row clearfix">
+		<div class="col-md-8">
+			<div class="blog" ng-repeat="blog in blogs">
+				<h6>
+					{{blog.title}}
+				</h6>
+				<small class="blog-small">标签: </small><span ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</span>
+				<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
+				<p>{{blog.content}}</p>
+				<p>
+					<a class="btn" href="#/blogDetail/{{blog._id}}/1">more »</a>
+				</p>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="me">
+				<dl>
+					<dt>
+						<img src="/images/me.jpg" class="blog-me">
+						<h6 class="me_name">
+							<a href="#">刘祖宽</a>
+						</h6>
+					</dt>
+					<dt class="me_intro">
+						<h7>职位: super_root</h7><br>
+						<h7>擅长: <span class="label label-success " style="margin-right: 10px">nodejs</span><span class="label label-success ">mongodb</span></h7>
+						<br>
+						<h7>发表: 10</h7>
+					</dt>
+				</dl>
 
-			<p>
-				 <a class="btn" href="#/blogDetail/{{blog._id}}/1"  >more »</a>
-			</p>
+			</div>
+			<div class="title_recent">
+				<h4>
+					<label>最近发表</label>
+				</h4>
+				<dl>
+				<dt ng-repeat="blog in blogs">
+					<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
+				</dt>
+			</dl>
+			</div>
+			
 		</div>
 	</div>
-	<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
-    class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-    boundary-links="true" ng-change="getBlogList()"></uib-pagination>
 </div>
 
+</div>
+<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
+	class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+	boundary-links="true" ng-change="getBlogList()"></uib-pagination>
+</div>
