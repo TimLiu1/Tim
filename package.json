@@ -28,6 +28,7 @@
     "marked": "^0.3.6",
     "moment": "^2.15.0",
     "mongoose": "^4.6.0",
+    "mongoose-auto-increment": "^5.0.1",
     "mongoose-paginate": "^5.0.0",
     "mongoose-updated_at": "0.0.2",
     "socket.io": "^1.4.8"

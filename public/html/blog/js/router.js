@@ -10,9 +10,9 @@ router.config(['$routeProvider',
                 templateUrl: '/html/blog/partials/post-blog.html',
                 controller: 'PostBlogCtrl'
             }).
-             when('/blogDetail/:_id/:flag', {
+             when('/blogDetail/:_id/:flag', {  //blog详情页面
                 templateUrl: '/html/blog/partials/blog_detail.html',
-                controller: 'BlogCtrl'
+                controller: 'BlogDetailCtrl'
             }).
              when('/updateBlog/:_id', {
                 templateUrl: '/html/blog/partials/update_blog.html',

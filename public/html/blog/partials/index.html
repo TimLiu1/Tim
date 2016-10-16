@@ -5,7 +5,7 @@
 				<h6>
 					{{blog.title}}
 				</h6>
-				<small class="blog-small">标签: </small><span ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</span>
+				<small class="blog-small">标签: </small><a ng-click="getLable(this.label)"  href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
 				<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
 				<p>{{blog.content}}</p>
 				<p>
@@ -33,7 +33,7 @@
 			</div>
 			<div class="title_recent">
 				<h4>
-					<label>最近发表</label>
+					<label>blog列表</label>
 				</h4>
 				<dl>
 				<dt ng-repeat="blog in blogs">

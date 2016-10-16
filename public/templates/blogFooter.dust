@@ -1,4 +1,5 @@
-<div class="footer" style="background-color:#fff">
+<div  style="width:95%;  position: relative; bottom:0; overflow:hidden;">
+<div class="footer" id="footer" style="background-color:#fff">
     <div class="">
         <div class="footer-box">
             <a>版权声明</a>|<a>问题反馈</a><br>
@@ -6,4 +7,5 @@
             <span>京 ICP 证 09002463 号|Copyright © 1999-2014, github, All Rights Reserved </span>
         </div>
     </div>
+</div>
 </div>

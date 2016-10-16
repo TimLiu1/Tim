@@ -1,6 +1,12 @@
-#contain{
+#body {
     background-color: #e7ecef;
 }
+#main{
+    width: 1200px;
+    text-align: center;
+    font-size: 12px;
+}
+
 article code {  
 white-space: normal;  
 word-break: break-all;  

@@ -1,32 +1,38 @@
-   <nav class="navbar navbar-inverse" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
+<nav class="navbar navbar-inverse" role="navigation">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button"  class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
             <span class="sr-only">Toggle navigation</span>
           </button>
-          <a class="navbar-brand" href="/">Tim</a>
-        </div>
+		<a class="navbar-brand" href="/">Tim</a>
+	</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navbar-collapse-5">
-          <ul class="nav navbar-nav">
-            <li><a href="#">主页</a></li>
-            <li ><a href="/blog#/postBlog">发布博文</a></li>
-            <li><a href="#">标签</a></li>
-           </ul>
-          <form class="navbar-form navbar-left" action="#" role="search">
-            <div class="form-group">
-              <div class="input-group">
-                <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
-                <span class="input-group-btn">
-                  <button type="submit" class="btn"><span class="fui-search"></span></button>
-                </span>
-              </div>
-            </div>
-          </form>
-           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/blog#/logout">登出</a></li>
-           </ul>
-       
-        </div><!-- /.navbar-collapse -->
-      </nav>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse"  id="navbar-collapse-5">
+		<ul class="nav navbar-nav">
+			<li><a href="#">主页</a></li>
+			<li><a href="/blog#/postBlog">发布博文</a></li>
+			<li><a href="#">标签</a></li>
+		</ul>
+		<form class="navbar-form navbar-left" method="get" action="" role="search">
+			<div class="form-group">
+				<div class="input-group">
+					<input class="form-control" ng-model="search.title" id="navbarInput-01" type="search" placeholder="Search">
+					<span class="input-group-btn">
+                  <button type="button"" ng-click="getBlogList()" class="btn"><span class="fui-search"></span></button>
+					</span>
+				</div>
+			</div>
+		</form>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="/blog#/logout">登出</a></li>
+		</ul>
+
+	</div>
+	<!-- /.navbar-collapse -->
+</nav>
+      <!--<script>
+        $("form").submit(function(e){
+	    	e.preventDefault();
+      	});
+      </script>-->

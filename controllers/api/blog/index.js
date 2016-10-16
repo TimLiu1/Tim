@@ -74,8 +74,17 @@ module.exports = function (app) {
     app.post('/blogList', Auth.isAuthenticated(), function (req, res, next) {
         logger.info('查询指定blog列表')
         let conditionPage = {}
-        let LIMIT = 10;
+        let LIMIT = 5;
         let currentPage = 1;
+        let condition = {}
+        let title = new RegExp(req.body.title)
+        let label = req.body.label
+        if(title){
+          condition.title = title;  
+        }
+         if(label){
+          condition.labels = label;  
+        }
         conditionPage = {
             page: currentPage,
             limit: LIMIT
@@ -84,7 +93,7 @@ module.exports = function (app) {
         if (req.body.currentPage) {
             conditionPage.page = req.body.currentPage;
         }
-        blog.paginate({}, conditionPage, function (err, blogs) {
+        blog.paginate(condition, conditionPage, function (err, blogs) {
             if (err) {
                 logger.info("查询数据库出错" + err);
                 res.json({ code: '999', msg: '查询数据库失败' + err })

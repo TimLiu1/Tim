@@ -26,13 +26,13 @@
 </head>
 
 <body id="body" ng-app="blogApp">
-
+ 
 </body>
 <div class="container-fluid view-container">
     {>"blogHeader" /}
     <div ng-view class="view-frame">
     </div>
-    <div class="container-fluid view-container">
+    <div class="container-fluid view-container" >
         {>"blogFooter" /}
     </div>
 
