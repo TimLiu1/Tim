@@ -1,4 +1,10 @@
-
+* {
+margin: 0;
+padding: 0;
+}
+html, body {
+height: 100%;
+}
 .login-screen-padding{
     padding: 123px 199px 33px 195px;
 }
@@ -26,4 +32,8 @@
     padding: 4px;
     min-height: 100px;
     margin-top:20px;
+}
+
+#footer {
+    min-height: 100%;
 }

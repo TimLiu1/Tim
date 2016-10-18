@@ -31,8 +31,4 @@
 	</div>
 	<!-- /.navbar-collapse -->
 </nav>
-      <!--<script>
-        $("form").submit(function(e){
-	    	e.preventDefault();
-      	});
-      </script>-->
+    

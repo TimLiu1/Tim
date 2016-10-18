@@ -1,11 +1,12 @@
-<div  style="width:95%;  position: relative; bottom:0; overflow:hidden;">
+<div  style="width:100%; min-height: 100%;">
 <div class="footer" id="footer" style="background-color:#fff">
     <div class="">
         <div class="footer-box">
             <a>版权声明</a>|<a>问题反馈</a><br>
             <label>博客开发 by Tim && Lisa</label><br>
-            <span>京 ICP 证 09002463 号|Copyright © 1999-2014, github, All Rights Reserved </span>
+            <span>京 ICP 证 09002463 号|Copyright © 2015-2016, Tim, All Rights Reserved </span>
         </div>
     </div>
 </div>
 </div>
+

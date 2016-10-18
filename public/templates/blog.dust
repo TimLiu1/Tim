@@ -30,9 +30,9 @@
 </body>
 <div class="container-fluid view-container">
     {>"blogHeader" /}
-    <div ng-view class="view-frame">
+    <div ng-view class="view-frame" style="min-height: 600px">
     </div>
-    <div class="container-fluid view-container" >
+    <div id="footer" class="container-fluid view-container" >
         {>"blogFooter" /}
     </div>
 
