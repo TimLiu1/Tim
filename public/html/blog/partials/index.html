@@ -7,7 +7,7 @@
 				</h6>
 				<small class="blog-small">标签: </small><a ng-click="getLable(this.label)"  href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
 				<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
-				<p>{{blog.content}}</p>
+				<p ng-bind-html="blog.content | trust"></p>
 				<p>
 					<a class="btn" href="#/blogDetail/{{blog._id}}/1">more »</a>
 				</p>

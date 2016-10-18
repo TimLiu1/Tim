@@ -100,6 +100,7 @@ module.exports = function (app) {
             }
             // console.log(blogs);
             blogs.docs.forEach((e) => {
+                  e.content = marked(e.content);
                 e.content = (e.content).substring(0, 200);
             });
 
