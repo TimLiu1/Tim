@@ -46,7 +46,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 // }])
 
 //blog详情页面
-blogControllers.controller('BlogDetailCtrl', ['$scope', '$routeParams', 'blogS', '$ngBootbox', '$location', function ($scope, $routeParams, blogS, $ngBootbox, $location) {
+blogControllers.controller('BlogDetailCtrl', ['$scope', '$window','$routeParams', 'blogS', '$ngBootbox', '$location', function ($scope,$window, $routeParams, blogS, $ngBootbox, $location) {
     $scope._id = $routeParams._id;
     $scope.flag = $routeParams.flag;
     //取得指定blog
@@ -76,6 +76,10 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$routeParams', 'blogS',
         }, function () {
             console.log('不删除');
         })
+    }
+
+    $scope.goBack = function(){
+        $window.history.back()
     }
 }])
 

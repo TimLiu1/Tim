@@ -3,7 +3,7 @@
 		<div class="col-md-8">
 			<div class="blog" ng-repeat="blog in blogs">
 				<h6>
-					{{blog.title}}
+				<a  href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
 				</h6>
 				<small class="blog-small">标签: </small><a ng-click="getLable(this.label)"  href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
 				<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
@@ -47,6 +47,8 @@
 	<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
 	class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 	boundary-links="true" ng-change="getBlogList()"></uib-pagination>
+
+
 
 </div>
 

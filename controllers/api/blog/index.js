@@ -25,6 +25,10 @@ marked.setOptions({
         return hljs.highlightAuto(code).value;
     }
 });
+var renderer = new marked.Renderer();
+renderer.table = function (header, body) {
+    return '<table class="table table-striped">'+header+body+'</table>'
+}
 
 module.exports = function (app) {
     app.options('*', cors())
