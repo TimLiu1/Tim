@@ -27,7 +27,7 @@ marked.setOptions({
 });
 var renderer = new marked.Renderer();
 renderer.table = function (header, body) {
-    return '<table class="table table-striped">'+header+body+'</table>'
+    return '<table class="table table-striped">' + header + body + '</table>'
 }
 
 module.exports = function (app) {
@@ -41,18 +41,14 @@ module.exports = function (app) {
             if (err) {
                 next()
             }
-            // console.log(result);
             res.json(result);
-
         })
     })
 
     //查询指定blog
     app.get('/getBlog', function (req, res, next) {
-       
         logger.info('查询指定blog');
         let _id = req.query._id;
-
         blog.findById(_id).exec().then((result) => {
             return result;
         }).then((result) => {
@@ -60,12 +56,10 @@ module.exports = function (app) {
                 result.content = marked(result.content);
             }
             console.log(result);
-
             let model = {
                 code: '000',
                 blog: result,
             }
-            console.log(model);
             res.json(model)
         }).catch((err) => {
             res.json({ code: '999', msg: '查询数据库出错' + err });
@@ -83,11 +77,11 @@ module.exports = function (app) {
         let condition = {}
         let title = new RegExp(req.body.title)
         let label = req.body.label
-        if(title){
-          condition.title = title;  
+        if (title) {
+            condition.title = title;
         }
-         if(label){
-          condition.labels = label;  
+        if (label) {
+            condition.labels = label;
         }
         conditionPage = {
             page: currentPage,
@@ -97,38 +91,26 @@ module.exports = function (app) {
         if (req.body.currentPage) {
             conditionPage.page = req.body.currentPage;
         }
-        blog.paginate(condition, conditionPage, function (err, blogs) {
-            if (err) {
-                logger.info("查询数据库出错" + err);
-                res.json({ code: '999', msg: '查询数据库失败' + err })
-            }
-            // console.log(blogs);
+        blog.paginate(condition, conditionPage).then((blogs) => {
             blogs.docs.forEach((e) => {
-                  e.content = marked(e.content);
+                e.content = marked(e.content);
                 e.content = (e.content).substring(0, 200);
             });
-
-            // let blogC = [];
-            // let detail = [];
-            // blogs.docs.forEach((e, index) => {
-            //     detail.push(e);
-            //     if (detail.length == 2) {
-            //         blogC.push(detail);
-            //         detail = [];
-            //     }
-            // });
-            // detail = [];
-            // if (blogs.docs.length % 2 != 0) {
-            //     console.log(blogs.docs[1]);
-            //     detail.push(blogs.docs[blogs.docs.length - 1]);
-            //     blogC.push(detail);
-            // }
             var model = {
                 blogs: blogs,
                 total: blogs.total,
                 pages: blogs.pages,
             }
-            res.json(model)
+            return model
+            // res.json(model)
+        }).then((model) => {
+            blog.count().then((blog_count) => {
+                model.blog_count = blog_count;
+                res.json(model);
+            })
+        }).catch((err) => {
+            logger.info('处理数据库列表出错'+err);
+            res.json({ code: '999', msg: '处理数据库列表出错,稍后重试' })
         })
     })
 
@@ -176,17 +158,17 @@ module.exports = function (app) {
         if (req.body.content) {
             content = req.body.content
         }
-            console.log('------->')
+        console.log('------->')
 
-            
-            //  SIO.io.on('contentC', function (data) {
-            //      console.log(data);
-            //      content = marked(content);
-            // });
-            // console.log('------')
-            // SIO.io.emit('contentS',content);
-            //console.log('/bluewhale');
-            //此处可获取客户端的cookie，在socket.handshake中，用于定位连接的客户端
+
+        //  SIO.io.on('contentC', function (data) {
+        //      console.log(data);
+        //      content = marked(content);
+        // });
+        // console.log('------')
+        // SIO.io.emit('contentS',content);
+        //console.log('/bluewhale');
+        //此处可获取客户端的cookie，在socket.handshake中，用于定位连接的客户端
 
 
         // content = marked(content);
