@@ -24,6 +24,23 @@ word-break: break-all;
     background-color: rgb(255, 255, 255);
     padding: 40px 30px 30px 30px;
 }
+.panel_head {
+    background-color:#FFFFF0;
+    height: 52px;
+}
+.panel_head h4{
+     line-height: 50px;
+        margin-bottom: 0px;
+}
+.panel_head h4 label{
+    padding-left: 20px;
+   font-size: 16px;
+    color: #333;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+
+}
 .title_recent {
     width: 350px;
     border-radius: 2%;
@@ -31,6 +48,7 @@ word-break: break-all;
 }
 .title_recent h4{
     line-height: 50px;
+        margin-bottom: 0px;
 }
 .title_recent h4 label{
     padding-left: 20px;

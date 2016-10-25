@@ -17,19 +17,19 @@ var responseError = function (err) {
 
 blogServices.factory('blogS', ['$http', function ($http) {
     return {
-        postBlog: function (blog) {
+        postBlog: function (blog) { //发表blog
             return $http.post(HOST + 'blog', blog).then(responseSuccess, responseError);
         },
-        getBlogList: function (blog) {
+        getBlogList: function (blog) { //获取blog列表
             return $http.post(HOST + 'blogList',blog).then(responseSuccess, responseError);
         },
-        deleteBlog: function (id) {
+        deleteBlog: function (id) {   //删除blog
             return $http.get(HOST + 'deleteBlog?_id=' + id).then(responseSuccess, responseError);
         },
-        updateBlog: function (obj) {
+        updateBlog: function (obj) { //更新blog
             return $http.post(HOST + 'updateBlog',obj).then(responseSuccess, responseError);
         },
-         getBlog: function (_id,flag) {
+         getBlog: function (_id,flag) { //取得具体blog
             return $http.get(HOST + 'getBlog?_id=' + _id+'&flag='+flag).then(responseSuccess, responseError);
         },
          exchangeTitle: function (obj) {

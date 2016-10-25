@@ -3,9 +3,9 @@
 		<div class="col-md-8">
 			<div class="blog" ng-repeat="blog in blogs">
 				<h6>
-				<a  href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
+					<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
 				</h6>
-				<small class="blog-small">标签: </small><a ng-click="getLable(this.label)"  href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
+				<small class="blog-small">标签: </small><a ng-click="getLable(this.label)" href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
 				<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
 				<p ng-bind-html="blog.content | trust"></p>
 				<p>
@@ -31,25 +31,47 @@
 				</dl>
 
 			</div>
+
+
+			<div class="title_recent" style="margin-top: 15px">
+				<div class="input-group">
+					<input type="text" ng-model="search.title" class="form-control input-lg"><span ng-click="getBlogList()"  class="input-group-addon btn btn-primary">搜索</span>
+				</div>
+			</div>
+			
 			<div class="title_recent">
+				<div class="panel_head">
 				<h4>
 					<label>blog列表</label>
 				</h4>
+				</div>
 				<dl>
-				<dt ng-repeat="blog in blogs">
-					<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
-				</dt>
-			</dl>
+					<dt ng-repeat="blog in blogs">
+						<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
+					</dt>
+				</dl>
 			</div>
+           
+		   <div class="title_recent">
+			   	<div class="panel_head">
+				<h4>
+					<label>存档</label>
+				</h4>
+				</div>
+				<dl>
+					<dt ng-repeat="blog in blogList">
+						<a href="">{{blog.time}}</a>({{blog.sum}})
+					</dt>
+				</dl>
+		   </div>
 			
+
 		</div>
 	</div>
 	<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
-	class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-	boundary-links="true" ng-change="getBlogList()"></uib-pagination>
+		class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+		boundary-links="true" ng-change="getBlogList()"></uib-pagination>
 
 
 
 </div>
-
-

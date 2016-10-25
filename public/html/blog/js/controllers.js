@@ -23,9 +23,9 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
                 console.log(data)
                 $scope.pageSize = 5;
                 $scope.blog_count = data.blog_count;
-                $scope.totalItems = data.total;
+                $scope.totalItems = data.blogs.total;
                 $scope.blogs = data.blogs.docs
-                console.log($scope.blogs);
+                $scope.blogList = data.blogList
             })
 
         }
@@ -34,6 +34,9 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
             $scope.search.label = label
             $scope.getBlogList();
         }
+
+   
+
 
     }])
 

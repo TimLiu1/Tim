@@ -4,6 +4,7 @@
  */
 let Promise = require('bluebird');
 let cors = require('cors');
+let async = require('async')
 let markdown = require('markdown').markdown;
 let marked = require('marked');
 let logger = require('log4js').getLogger('tim');
@@ -49,13 +50,13 @@ module.exports = function (app) {
     app.get('/getBlog', function (req, res, next) {
         logger.info('查询指定blog');
         let _id = req.query._id;
+
         blog.findById(_id).exec().then((result) => {
             return result;
         }).then((result) => {
             if (req.query.flag && req.query.flag == '1') {
                 result.content = marked(result.content);
             }
-            console.log(result);
             let model = {
                 code: '000',
                 blog: result,
@@ -74,7 +75,9 @@ module.exports = function (app) {
         let conditionPage = {}
         let LIMIT = 5;
         let currentPage = 1;
-        let condition = {}
+        let condition = {};
+        let conditionGroup = { $group: { _id: { year: { "$year": "$createdAt" }, month: { "$month": "$createdAt" } }, sum: { "$sum": 1 } } }
+        let conditionJson = { $match: {} };
         let title = new RegExp(req.body.title)
         let label = req.body.label
         if (title) {
@@ -91,27 +94,79 @@ module.exports = function (app) {
         if (req.body.currentPage) {
             conditionPage.page = req.body.currentPage;
         }
-        blog.paginate(condition, conditionPage).then((blogs) => {
-            blogs.docs.forEach((e) => {
+        async.parallel([
+            function (cb) {
+                blog.count().then((blog_count) => {
+                    cb(null, blog_count)
+                }).catch((err) => {
+                    return cb(err)
+                })
+            },
+            function (cb) {
+                blog.paginate(condition, conditionPage, (err, blogs) => {
+                    if (err) {
+                        return cb(err)
+                    }
+                    cb(null, blogs)
+                })
+
+            },
+            function (cb) {
+                blog.aggregate([conditionJson, conditionGroup], (err, blogList) => {
+
+                    if (err) {
+                        console.log("woshi" + err)
+                        return cb(err)
+                    }
+                    cb(null, blogList)
+                })
+
+
+            }
+        ], function (err, results) {
+            if (err) {
+                logger.info('处理数据库列表出错' + err);
+                res.json({ code: '999', msg: '处理数据库列表出错,稍后重试' })
+            }
+            results[2].forEach((e)=>{
+                e.time = e._id.year +"年"+e._id.month+"月"
+            })
+
+            results[1].docs.forEach((e) => {
                 e.content = marked(e.content);
                 e.content = (e.content).substring(0, 200);
             });
             var model = {
-                blogs: blogs,
-                total: blogs.total,
-                pages: blogs.pages,
+                blogs: results[1],
+                blog_count: results[0],
+                blogList: results[2],
             }
-            return model
-            // res.json(model)
-        }).then((model) => {
-            blog.count().then((blog_count) => {
-                model.blog_count = blog_count;
-                res.json(model);
-            })
-        }).catch((err) => {
-            logger.info('处理数据库列表出错'+err);
-            res.json({ code: '999', msg: '处理数据库列表出错,稍后重试' })
+            res.json(model);
+
         })
+
+
+        // blog.paginate(condition, conditionPage).then((blogs) => {
+        //     blogs.docs.forEach((e) => {
+        //         e.content = marked(e.content);
+        //         e.content = (e.content).substring(0, 200);
+        //     });
+        //     var model = {
+        //         blogs: blogs,
+        //         total: blogs.total,
+        //         pages: blogs.pages,
+        //     }
+        //     return model
+        //     // res.json(model)
+        // }).then((model) => {
+        //     blog.count().then((blog_count) => {
+        //         model.blog_count = blog_count;
+        //         res.json(model);
+        //     })
+        // }).catch((err) => {
+        //     logger.info('处理数据库列表出错' + err);
+        //     res.json({ code: '999', msg: '处理数据库列表出错,稍后重试' })
+        // })
     })
 
     //删除blog
