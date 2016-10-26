@@ -10,10 +10,6 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         $scope.search.title = $routeParams.flag;
         //   获取blog列表
         $scope.getBlogList = function () {
-            console.log('345')
-            console.log();
-            console.log($scope.search.label);
-            console.log($scope.currentPage);
             $scope.search.currentPage = $scope.currentPage;
             blogS.getBlogList($scope.search).then(function (data) {
                 if (data.err) {
@@ -26,6 +22,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
                 $scope.totalItems = data.blogs.total;
                 $scope.blogs = data.blogs.docs
                 $scope.blogList = data.blogList
+                console.log($scope.blogList);
             })
 
         }
@@ -33,9 +30,15 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
         $scope.getLable = function (label) {
             $scope.search.label = label
             $scope.getBlogList();
+
         }
 
-   
+        $scope.searchByMonth = function (year, month) {
+            console.log(year)
+            $scope.search.year = year;
+            $scope.search.month = month;
+            $scope.getBlogList();
+        }
 
 
     }])
@@ -50,7 +53,7 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
 // }])
 
 //blog详情页面
-blogControllers.controller('BlogDetailCtrl', ['$scope', '$window','$routeParams', 'blogS', '$ngBootbox', '$location', function ($scope,$window, $routeParams, blogS, $ngBootbox, $location) {
+blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams', 'blogS', '$ngBootbox', '$location', function ($scope, $window, $routeParams, blogS, $ngBootbox, $location) {
     $scope._id = $routeParams._id;
     $scope.flag = $routeParams.flag;
     //取得指定blog
@@ -82,7 +85,7 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$window','$routeParams'
         })
     }
 
-    $scope.goBack = function(){
+    $scope.goBack = function () {
         $window.history.back()
     }
 }])

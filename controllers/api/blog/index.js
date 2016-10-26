@@ -7,6 +7,7 @@ let cors = require('cors');
 let async = require('async')
 let markdown = require('markdown').markdown;
 let marked = require('marked');
+let moment = require('moment');
 let logger = require('log4js').getLogger('tim');
 let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
@@ -71,11 +72,21 @@ module.exports = function (app) {
 
     //查询blog列表
     app.post('/blogList', Auth.isAuthenticated(), function (req, res, next) {
-        logger.info('查询指定blog列表')
+        logger.info('查询blog列表')
         let conditionPage = {}
         let LIMIT = 5;
         let currentPage = 1;
         let condition = {};
+
+        // 如果通过月份查询数据
+        let year = req.body.year;
+        let month = req.body.month;
+        if (year) {
+            let start = moment(year + '-' + month + '-01').startOf('month').toDate();
+            let end = moment(year + '-' + month + '-01').endOf('month').toDate();
+            condition = { createdAt: { "$gte": start, "$lte": end } }
+        }
+
         let conditionGroup = { $group: { _id: { year: { "$year": "$createdAt" }, month: { "$month": "$createdAt" } }, sum: { "$sum": 1 } } }
         let conditionJson = { $match: {} };
         let title = new RegExp(req.body.title)
@@ -90,10 +101,11 @@ module.exports = function (app) {
             page: currentPage,
             limit: LIMIT
         }
-        console.log(req.body);
+        console.log(condition);
         if (req.body.currentPage) {
             conditionPage.page = req.body.currentPage;
         }
+
         async.parallel([
             function (cb) {
                 blog.count().then((blog_count) => {
@@ -128,8 +140,8 @@ module.exports = function (app) {
                 logger.info('处理数据库列表出错' + err);
                 res.json({ code: '999', msg: '处理数据库列表出错,稍后重试' })
             }
-            results[2].forEach((e)=>{
-                e.time = e._id.year +"年"+e._id.month+"月"
+            results[2].forEach((e) => {
+                e.time = e._id.year + "年" + e._id.month + "月"
             })
 
             results[1].docs.forEach((e) => {
@@ -233,6 +245,17 @@ module.exports = function (app) {
         };
         res.json(model);
 
+    })
+
+    // 通过月份查找blog
+    app.get('/searchByMonth', function (req, res) {
+        let year = req.query.year;
+        let month = req.query.month;
+        let start = moment(year + '-' + month + '-01').startOf('month').toDate();;
+        let end = moment(year + '-' + month + '-01').endOf('month').toDate();;
+        let condition = {
+
+        }
     })
 
 }

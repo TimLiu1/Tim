@@ -60,7 +60,7 @@
 				</div>
 				<dl>
 					<dt ng-repeat="blog in blogList">
-						<a href="">{{blog.time}}</a>({{blog.sum}})
+						<a href="" ng-click="searchByMonth(this.blog._id.year,this.blog._id.month)">{{blog.time}}</a>({{blog.sum}})
 					</dt>
 				</dl>
 		   </div>
