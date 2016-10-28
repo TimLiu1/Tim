@@ -10,7 +10,7 @@
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse"  id="navbar-collapse-5">
 		<ul class="nav navbar-nav">
-			<li><a href="#">主页</a></li>
+			<li><a href="#/index">主页</a></li>
 			<li><a href="/blog#/postBlog">发布博文</a></li>
 			<li><a href="#">标签</a></li>
 		</ul>
