@@ -289,11 +289,17 @@ section {
 #portfolio * {
   z-index: 2;
 }
+ #coontain {
+     width: 80%;
+   }
 
 @media (min-width:767px) {
   #portfolio .portfolio-item {
     margin: 0 0 30px;
-  }
+  };
+   #coontain {
+     width: 100%;
+   }
 }
 
 /*.col-md-4 {

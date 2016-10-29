@@ -1,7 +1,7 @@
-<div id="contain" class="container">
+<div  id="contain" class="container-fluid">
 	<div class="row clearfix">
-		<div class="col-md-8">
-			<div class="blog" ng-repeat="blog in blogs">
+		<div class="col-md-8 col-xs-12">
+			<div class="blog container-fluid  view-container" ng-repeat="blog in blogs">
 				<h6>
 					<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
 				</h6>
@@ -13,7 +13,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-xs-12 col-md-4">
 			<div class="me">
 				<dl>
 					<dt>
@@ -67,11 +67,10 @@
 			
 
 		</div>
+		
 	</div>
+
 	<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
 		class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
 		boundary-links="true" ng-change="getBlogList()"></uib-pagination>
-
-
-
 </div>

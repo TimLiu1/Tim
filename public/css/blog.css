@@ -37,3 +37,51 @@ height: 100%;
 #footer {
     min-height: 100%;
 }
+
+
+ html, body {
+     height: 100%;
+     /* The html and body elements cannot have any padding or margin. */
+ }
+ html {
+     font-size: 18px;
+ }
+ .wrap {
+     min-height: 100%;
+     height: auto;
+     /* Negative indent footer by its height */
+     margin: 0 auto -55px;
+     /* Pad bottom by footer height */
+     padding: 0 0 55px;
+ }
+ 
+
+@media (max-width: 1000px) {
+     #contain{
+         width: 80%;
+     }
+ }
+ @media (max-width: 375px) {
+     html {
+         font-size: 14px;
+     };
+     #contain{
+         width: 100%;
+     }
+ }
+ @media (max-width: 320px) {
+     html {
+         font-size: 12px;
+     };
+     #contain{
+         width: 100%;
+     }
+ }
+ body {
+     font-family: "Helvetica Neue", Helvetica, STheiti, "Microsoft YaHei", "微软雅黑", FangSong, "仿宋", Arial, Tahoma, sans-serif, serif;
+     background-color:#EFEFEF;
+ }
+ h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
+     font-family: "Helvetica Neue", Helvetica, STheiti, "Microsoft YaHei", "微软雅黑", FangSong, "仿宋", Arial, Tahoma, sans-serif, serif;
+ }
+ @-ms-viewport       { width: device-width; }
