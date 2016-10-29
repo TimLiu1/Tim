@@ -15,3 +15,8 @@
 <button type="button" ng-click="goBack()" class="btn btn-primary"><< 返回</button>
 </div>
        
+<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10"
+                items-per-page="pageSize"
+                class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;"
+                first-text="&laquo;" last-text="&raquo;"
+                boundary-links="true" ng-change="query()"></uib-pagination>
