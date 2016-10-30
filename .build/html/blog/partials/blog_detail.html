@@ -1,4 +1,4 @@
-<div style="widows: 80%"  class="container-fluid">
+<div style="width:80%"  class="container-fluid">
 <h5>{{blog.title}}</h5>
   <div class="collapse navbar-collapse" id="navbar-collapse-5">
  <ul class="nav navbar-nav">
@@ -10,6 +10,7 @@
            </ul>
   </div>
 <hr>
+
 <p ng-bind-html="blog.content | trust"></p>
 
 <button type="button" ng-click="goBack()" class="btn btn-primary"><< 返回</button>

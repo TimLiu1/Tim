@@ -121,8 +121,8 @@ blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$w
 
         //发布blog
         $scope.postBlog = function () {
-            var content = simplemde.value();
-            if(!content){
+            $scope.search.content = simplemde.value();
+            if(!$scope.search.content){
                 $ngBootbox.alert('内容必须输入');
                 return;
             }
