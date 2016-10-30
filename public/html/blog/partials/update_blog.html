@@ -1,42 +1,31 @@
-
-
-
-<div class="panel panel-default" class="container-fluid">
-  <div class="panel-body">
-    <form class="form-horizontal" name="userForm" role="form">
-      <input type="hidden" name="_csrf" value="{_csrf}" ng-model="search._csrf" />
-      <div class="form-group">
-        <label class="col-sm-1 control-label">名称:<span class="required-indicator"  style="color:red">*</span></label>
-        <div class="col-sm-3">
-          <input type="text" name="title" class="form-control" ng-model="search.title" required />
-        </div>
-
-      </div>
-      	<div class="form-group">
+<div class="panel panel-default" style="width:80%; margin-left: 7%">
+	<div class="panel-body">
+		<form class="form-horizontal" name="userForm" ng-submit="update()" role="form">
+			<div class="form-group">
+				<label class="col-sm-1 control-label">名称:<span class="required-indicator"  style="color:red">*</span></label>
+				<div class="col-sm-4">
+					<input type="text" name="title" class="form-control" ng-model="search.title" required />
+				</div>
 				<label class="col-sm-1 control-label">标签:<span class="required-indicator"  style="color:red">*</span></label>
-				<div class="col-sm-3">
+				<div class="col-sm-4">
 					<input type="text" name="tags" placeholder="标签间用空格隔开" class="form-control" ng-model="search.labels" required />			
 				</div>
 
 			</div>
-      <div class="form-group">
-        <label class="col-sm-1 control-label">正文:<span class="required-indicator" style="color:red">*</span></label>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-6">
-          <textarea rows=100 cols=15 ng-model="search.content" ng-change="change()" class="form-control"></textarea>
-          <div style="margin-top:20px" class="col-sm-12">
-            <button ng-click="update()" type="button " class="btn btn-primary btn-lg btn-block">更新</button>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <p  ng-bind-html="contentC | trust">
-            </textarea>
-        </div>
-      </div>
-     
+			
+			<div class="form-group" style="text-align: center">
+				<label class="col-sm-6 control-label" style="font-size: 18px;font-weight: bold">正文<span class="required-indicator" style="color:red"></span></label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<textarea  class="form-control"></textarea>					
+					<div style="margin-top:20px" class="col-sm-12">
+						<button type="submit"" type="button" class="btn btn-primary btn-lg btn-block">更新</button>
+					</div>
+				</div>
+			
+			</div>
+		</form>
+	</div>
+</div>
 
-    
-    </form>
-    </div>
-  </div>

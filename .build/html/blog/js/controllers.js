@@ -99,20 +99,33 @@ blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$w
         $scope.flag = $routeParams.flag;
         $scope.currentPage = 1;
 
+        //markdown语法解析
+        var simplemde = new SimpleMDE({
+            renderingConfig: {
+                singleLineBreaks: false,
+                codeSyntaxHighlighting: true,
+            },
+            placeholder: "content...",
+        })
+
 
         //socket.io实时更新
         $rootScope.socket = io('http://115.159.146.35:8000');
         $rootScope.socket.on('contentS', function (data) {
-            console.log('--------->')
-            console.log(data);
             $scope.contentC = data;
         });
         $scope.change = function () {
             $rootScope.socket.emit('contentC', $scope.search.content);
         }
 
+
         //发布blog
         $scope.postBlog = function () {
+            var content = simplemde.value();
+            if(!content){
+                $ngBootbox.alert('内容必须输入');
+                return;
+            }
             $scope.search.labels = $scope.search.labels.split(" ")
             blogS.postBlog($scope.search).then(function (data) {
                 if (data.err) {
@@ -135,6 +148,17 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         $scope.flag = $routeParams.flag;
         console.log($scope.flag);
 
+
+          //markdown语法解析
+        var simplemde = new SimpleMDE({
+            renderingConfig: {
+                singleLineBreaks: false,
+                codeSyntaxHighlighting: true,
+            },
+            placeholder: "content...",
+        })
+
+   
         //更新blog 
         $scope.getblog = function () {
             blogS.getBlog($scope._id, $scope.flag).then(function (data) {
@@ -147,6 +171,7 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
                 $scope.search.title = data.blog.title;
                 $scope.search.labels = data.blog.labels.join(" ");
                 $scope.search.content = data.blog.content;
+               simplemde.value($scope.search.content);
             })
         }
 
@@ -175,6 +200,7 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         $scope.update = function () {
             $scope.search.labels = $scope.search.labels.split(" ")
             $ngBootbox.confirm("确定更新?").then(function () {
+              $scope.search.content = simplemde.value();
                 blogS.updateBlog($scope.search).then(function (data) {
                     if (data.err) {
                         $ngBootbox.alert(data.msg);
