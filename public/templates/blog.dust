@@ -19,7 +19,7 @@
 	<link rel="shortcut icon" href="/img/favicon.ico">
 
 
-
+    
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -37,6 +37,7 @@
 	<div id="footer" class="container-fluid view-container">
 		{>"blogFooter" /}
 	</div>
+
 
 
 	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
