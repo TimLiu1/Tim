@@ -8,15 +8,19 @@ module.exports = function (router) {
     var model = new IndexModel();
 
     router.get('/', function (req, res) {
-        
-        
+
+
         res.render('index', model);
-        
-        
+
+
     });
 
-      router.get('/blog', function (req, res) {
+    router.get('/blog', function (req, res) {
         res.render('blog', model);
+    });
+
+    router.get('/tag', function (req, res) {
+        res.render('tag', model);
     });
 
 };

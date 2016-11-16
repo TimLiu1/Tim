@@ -70,11 +70,10 @@ module.exports = function (app) {
             res.json({ code: '999', msg: '查询数据库出错' + err });
         })
     })
-
-
+//Auth.isAuthenticated(),
 
     //查询blog列表
-    app.post('/blogList', Auth.isAuthenticated(), function (req, res, next) {
+    app.post('/blogList',  function (req, res, next) {
         logger.info('查询blog列表')
         let conditionPage = {}
         let LIMIT = 5;

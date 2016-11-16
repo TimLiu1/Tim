@@ -30,6 +30,10 @@ router.config(['$routeProvider',
                 templateUrl:'/html/blog/partials/login.html',
                 controller:'LogoutCtrl'
             }).
+             when('/tag',{
+                templateUrl:'/html/blog/partials/tag.html',
+                controller:'TagCtrl'
+            }).
             otherwise({
                 redirectTo: '/index'
             });

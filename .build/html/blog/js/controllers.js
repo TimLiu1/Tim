@@ -252,3 +252,9 @@ blogControllers.controller('LogoutCtrl', ['$scope', 'UM', '$ngBootbox', 'storage
 
     }])
 
+    //登出控制器
+blogControllers.controller('TagCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth',
+    function ($scope, UM, $ngBootbox, storage, Auth) {
+        console.log('标签云')
+    }])
+

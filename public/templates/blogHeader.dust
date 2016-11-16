@@ -12,7 +12,7 @@
 		<ul class="nav navbar-nav">
 			<li><a href="#/index">主页</a></li>
 			<li><a href="/blog#/postBlog">发布博文</a></li>
-			<li><a href="#">标签</a></li>
+			<li><a href="/blog#/tag">标签</a></li>
 		</ul>
 		
 		<ul class="nav navbar-nav navbar-right">
