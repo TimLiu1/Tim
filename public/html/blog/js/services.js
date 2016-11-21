@@ -1,5 +1,6 @@
 var blogServices = angular.module('blogServices', []);
 var HOST = '/api/blog/'
+var api = '/user/'
 
 
 var responseSuccess = function (res) {
@@ -36,5 +37,13 @@ blogServices.factory('blogS', ['$http', function ($http) {
             return $http.post(HOST + 'exchangeTitle',obj).then(responseSuccess, responseError);
         },
 
+    }
+}])
+
+blogServices.factory('UserSer', ['$http', function ($http) {
+    return {
+        sign: function (blog) { //发表blog
+            return $http.post(api + 'sign', blog).then(responseSuccess, responseError);
+        },
     }
 }])

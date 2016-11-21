@@ -28,7 +28,6 @@ module.exports = function (app) {
                 })
             },
             function (result, cb) {
-                console.log('abcvfghjkjhgfghjhgfghj')
                 let user = new User(signCondition);
                 user.token = jwt.sign(user, "Tim");
                 user.save(function (err, user1) {

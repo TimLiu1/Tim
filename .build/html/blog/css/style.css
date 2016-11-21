@@ -14,7 +14,7 @@ word-break: break-all;
 .blog {
     background-color: rgb(255, 255, 255);
     padding: 40px 40px 30px;
-     border-radius: 2%;
+    border-radius: 2%;
     margin-bottom: 20px;
 }
 .me {
@@ -27,11 +27,33 @@ word-break: break-all;
 .panel_head {
     background-color:#FFFFF0;
     height: 52px;
+     
 }
+.panel_head_login {
+      border-radius: 2%;
+    background-color: rgb(255, 255, 255);
+    height: 80px;
+    text-align: center;
+     
+}
+
 .panel_head h4{
      line-height: 50px;
         margin-bottom: 0px;
 }
+
+
+.input{
+     border: 0;
+    
+}
+ .input:focus {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+}
+
 .panel_head h4 label{
     padding-left: 20px;
    font-size: 16px;
@@ -41,6 +63,40 @@ word-break: break-all;
     font-weight: bold;
 
 }
+
+
+.title_recent_login {
+    width: 350px;
+    border-radius: 2%;
+    background-color: rgb(255, 255, 255);
+}
+
+.title_recent_login h4{
+    line-height: 30px;
+    margin-bottom: 0px;
+}
+.title_recent_login h6,h7{
+ 
+    color: #787878;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+
+}
+
+.title_recent_login dl  {
+     text-align: center;
+      margin-top: 0px;
+      margin-bottom: 10px;
+      border-top:1px #ccc solid;
+}
+.title_recent_login dl dt {
+    font-size: 12px;
+  
+}
+
+
+
 .title_recent {
     width: 350px;
     border-radius: 2%;
@@ -53,7 +109,7 @@ word-break: break-all;
 .title_recent h4 label{
     padding-left: 20px;
    font-size: 16px;
-    color: #333;
+    color: #787878;
     display: inline-block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -68,6 +124,8 @@ word-break: break-all;
     font-size: 12px;
   
 }
+
+
 
 
 .me_name {
@@ -101,3 +159,8 @@ img {
  margin-right: 5px;
  font-size: 10px;
 }
+
+
+
+
+

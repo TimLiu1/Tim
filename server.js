@@ -13,7 +13,7 @@ var server;
 
 server = http.createServer(app);
 sio.init(server);
-server.listen(process.env.PORT || 8000);
+server.listen(process.env.PORT || 8888);
 server.on('listening', function () {
     console.log('Server listening on http://localhost:%d', this.address().port);
 });

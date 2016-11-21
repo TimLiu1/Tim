@@ -3,11 +3,12 @@ var blogControllers = angular.module('blogControllers', []);
 
 
 //主页控制器
-blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
-    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
+blogControllers.controller('BlogCtrl', ['$scope', 'blogS', 'UserSer','$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
+    function ($scope, blogS,UserSer, $ngBootbox, $window, $location, $routeParams, $rootScope) {
         $scope.search = {};
         $scope.currentPage = 1;
         $scope.search.title = $routeParams.flag;
+        $scope.flag = 0;
         //   获取blog列表
         $scope.getBlogList = function () {
             $scope.search.currentPage = $scope.currentPage;
@@ -40,6 +41,33 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$windo
             $scope.getBlogList();
         }
 
+        $scope.changeFlag = function(flag){
+            $scope.flag = flag
+        } 
+
+          $scope.register = function(flag){
+           if(!$scope.search.username || !$scope.search.password || !$scope.search.rePassword){
+           $ngBootbox.alert("请填写所有必填项");
+           return;
+           }else{
+               UserSer.sign($scope.search).then(function(data){
+                   console.log(data);
+                   if(!data.err){
+                       $ngBootbox.alert("注册成功,请登录");
+                       $scope.flag = 0;
+                   }
+               })
+           }
+        } 
+
+         $scope.login = function(){
+           if(!$scope.search.username || !$scope.search.password ){
+           $ngBootbox.alert("请填写所有必填项");
+           return;
+           }else{
+              
+           }
+        } 
 
     }])
 
@@ -238,6 +266,10 @@ blogControllers.controller('LoginCtrl', ['$scope', 'UM', '$ngBootbox', 'storage'
         }
 
     }])
+
+
+
+    
 
 
 //登出控制器
