@@ -1,104 +1,103 @@
 <div style="width: 80%" class="container-fluid">
-	<div class="row clearfix">
-		<div class="col-md-8 col-xs-12">
-			<div class="blog container-fluid  view-container" ng-repeat="blog in blogs">
-				<h6>
-					<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
-				</h6>
-				<small class="blog-small">标签: </small><a ng-click="getLable(this.label)" href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
-				<small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
-				<p ng-bind-html="blog.content | trust"></p>
-				<p>
-					<a class="btn" href="#/blogDetail/{{blog._id}}/1">more »</a>
-				</p>
-			</div>
-		</div>
-		<div class="col-xs-12 col-md-4">
-			<div class="title_recent_login">
-				<dl>
-						<h6>登录</h6><br/>
-						<h7>登录后可发布自己的blog</h7>
-						<div class="form-group"></div>
-						
-						<p><a href="" ng-click="changeFlag(1)">注册</a></p>
-						<p><a href="" ng-click="changeFlag(0)">登录</a></p>
-				</dl>
-				<dl>
-					<input class="input"  style="margin-top:10px; width:300px;" ng-model="search.username" type="text" placeholder="用户名">
-				</dl>
-				<dl>
-					<input class="input" style="margin-top:10px;  width:300px;" ng-model="search.password" type="password" placeholder="密码">
-				</dl>
-				<dl ng-show="flag == 1" >
-					<input class="input"  style="margin-top:10px;  width:300px;" type="password" ng-model="search.rePassword" placeholder="确认密码">
-				</dl>
-				<dl ng-show="flag == 0"  style="padding-left:0px;" >
-					<button   class="btn btn-primary btn-block">登录</button>
-				</dl>
-					<dl ng-show="flag == 1"  style="padding-left:0px;" >
-					<button ng-click="register()"  class="btn btn-primary btn-block">注册</button>
-				</dl>
-			</div>
+    <div class="row clearfix">
+        <div class="col-md-8 col-xs-12">
+            <div class="blog container-fluid  view-container" ng-repeat="blog in blogs">
+                <h6>
+                    <a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
+                </h6>
+                <small class="blog-small">标签: </small><a ng-click="getLable(this.label)" href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
+                <small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
+                <p ng-bind-html="blog.content | trust"></p>
+                <p>
+                    <a class="btn" href="#/blogDetail/{{blog._id}}/1">more »</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="title_recent_login" ng-show="!user">
+                <dl>
+                    <h6>登录</h6><br/>
+                    <h7>登录后可发布自己的blog</h7>
+                    <div class="form-group"></div>
+
+                    <p><a href="" ng-click="changeFlag(1)">注册</a></p>
+                    <p><a href="" ng-click="changeFlag(0)">登录</a></p>
+                </dl>
+                <dl>
+                    <input class="input" style="margin-top:10px; width:300px;" ng-model="search.username" type="text" placeholder="用户名">
+                </dl>
+                <dl>
+                    <input class="input" style="margin-top:10px;  width:300px;" ng-model="search.password" type="password" placeholder="密码">
+                </dl>
+                <dl ng-show="flag == 1">
+                    <input class="input" style="margin-top:10px;  width:300px;" type="password" ng-model="search.rePassword" placeholder="确认密码">
+                </dl>
+                <dl ng-show="flag == 0" style="padding-left:0px;">
+                    <button class="btn btn-primary btn-block" ng-click="login()">登录</button>
+                </dl>
+                <dl ng-show="flag == 1" style="padding-left:0px;">
+                    <button ng-click="register()" class="btn btn-primary btn-block">注册</button>
+                </dl>
+            </div>
 
 
 
-			<div class="me">
-				<dl>
-					<dt>
+            <div class="me">
+                <dl>
+                    <dt>
 						<img src="/images/me.jpg" class="blog-me">
 						<h6 class="me_name">
 							<a href="#">刘祖宽</a>
 						</h6>
 					</dt>
-					<dt class="me_intro">
+                    <dt class="me_intro">
 						<h7>职位: super_root</h7><br>
 						<h7>擅长: <span class="label label-success " style="margin-right: 10px">nodejs</span><span class="label label-success ">mongodb</span></h7>
 						<br>
 						<h7>发表: {{blog_count}}</h7>
 					</dt>
-				</dl>
+                </dl>
 
-			</div>
+            </div>
 
 
-			<div class="title_recent" style="margin-top: 15px">
-				<div class="input-group">
-					<input type="text" ng-model="search.title" class="form-control input-lg"><span ng-click="getBlogList()" class="input-group-addon btn btn-primary">搜索</span>
-				</div>
-			</div>
+            <div class="title_recent" style="margin-top: 15px">
+                <div class="input-group">
+                    <input type="text" ng-model="search.title" class="form-control input-lg"><span ng-click="getBlogList()" class="input-group-addon btn btn-primary">搜索</span>
+                </div>
+            </div>
 
-			<div class="title_recent">
-				<div class="panel_head">
-					<h4>
-						<label>blog列表</label>
-					</h4>
-				</div>
-				<dl>
-					<dt ng-repeat="blog in blogs">
+            <div class="title_recent">
+                <div class="panel_head">
+                    <h4>
+                        <label>blog列表</label>
+                    </h4>
+                </div>
+                <dl>
+                    <dt ng-repeat="blog in blogs">
 						<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
 					</dt>
-				</dl>
-			</div>
+                </dl>
+            </div>
 
-			<div class="title_recent">
-				<div class="panel_head">
-					<h4>
-						<label>存档</label>
-					</h4>
-				</div>
-				<dl>
-					<dt ng-repeat="blog in blogList">
+            <div class="title_recent">
+                <div class="panel_head">
+                    <h4>
+                        <label>存档</label>
+                    </h4>
+                </div>
+                <dl>
+                    <dt ng-repeat="blog in blogList">
 						<a href="" ng-click="searchByMonth(this.blog._id.year,this.blog._id.month)">{{blog.time}}</a>({{blog.sum}})
 					</dt>
-				</dl>
-			</div>
+                </dl>
+            </div>
 
 
-		</div>
+        </div>
 
-	</div>
+    </div>
 
-	<uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
-		class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-		boundary-links="true" ng-change="getBlogList()"></uib-pagination>
+    <uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize" class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+        boundary-links="true" ng-change="getBlogList()"></uib-pagination>
 </div>

@@ -3,16 +3,16 @@ var blogControllers = angular.module('blogControllers', []);
 
 
 //主页控制器
-blogControllers.controller('BlogCtrl', ['$scope', 'blogS', 'UserSer','$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
-    function ($scope, blogS,UserSer, $ngBootbox, $window, $location, $routeParams, $rootScope) {
+blogControllers.controller('BlogCtrl', ['$scope', 'blogS', 'UserSer', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope', 'UM', 'Auth',
+    function($scope, blogS, UserSer, $ngBootbox, $window, $location, $routeParams, $rootScope, UM, Auth) {
         $scope.search = {};
         $scope.currentPage = 1;
         $scope.search.title = $routeParams.flag;
         $scope.flag = 0;
         //   获取blog列表
-        $scope.getBlogList = function () {
+        $scope.getBlogList = function() {
             $scope.search.currentPage = $scope.currentPage;
-            blogS.getBlogList($scope.search).then(function (data) {
+            blogS.getBlogList($scope.search).then(function(data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
                     return;
@@ -28,48 +28,60 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', 'UserSer','$ngBootbox
 
         }
         $scope.getBlogList();
-        $scope.getLable = function (label) {
+        $scope.getLable = function(label) {
             $scope.search.label = label
             $scope.getBlogList();
 
         }
 
-        $scope.searchByMonth = function (year, month) {
+        $scope.searchByMonth = function(year, month) {
             console.log(year)
             $scope.search.year = year;
             $scope.search.month = month;
             $scope.getBlogList();
         }
 
-        $scope.changeFlag = function(flag){
+        $scope.changeFlag = function(flag) {
             $scope.flag = flag
-        } 
+        }
 
-          $scope.register = function(flag){
-           if(!$scope.search.username || !$scope.search.password || !$scope.search.rePassword){
-           $ngBootbox.alert("请填写所有必填项");
-           return;
-           }else{
-               UserSer.sign($scope.search).then(function(data){
-                   console.log(data);
-                   if(!data.err){
-                       $ngBootbox.alert("注册成功,请登录");
-                       $scope.flag = 0;
-                   }
-               })
-           }
-        } 
+        $scope.register = function(flag) {
+            if (!$scope.search.username || !$scope.search.password || !$scope.search.rePassword) {
+                $ngBootbox.alert("请填写所有必填项");
+                return;
+            } else {
+                UserSer.sign($scope.search).then(function(data) {
+                    console.log(data);
+                    if (!data.err) {
+                        $ngBootbox.alert("注册成功,请登录");
+                        $scope.flag = 0;
+                    }
+                })
+            }
+        }
 
-         $scope.login = function(){
-           if(!$scope.search.username || !$scope.search.password ){
-           $ngBootbox.alert("请填写所有必填项");
-           return;
-           }else{
-              
-           }
-        } 
+        $scope.login = function() {
+            if (!$scope.search.username || !$scope.search.password) {
+                $ngBootbox.alert("请填写所有必填项");
+                return;
+            } else {
+                UM.login($scope.search).then(function(data) {
+                    console.log(data);
+                    if (data.data.code == '000') {
+                        $ngBootbox.alert("登陆成功");
+                        var user = data.data;
+                        $rootScope.user = user;
+                        Auth.setUser(user);
+                        Auth.setToken(data.data.user.token);
+                    } else {
+                        $ngBootbox.alert(data.data.msg);
+                    }
+                })
+            }
+        }
 
-    }])
+    }
+])
 
 
 // blogControllers.controller('headController', ['$scope', '$location', '$routeParams',
@@ -81,12 +93,12 @@ blogControllers.controller('BlogCtrl', ['$scope', 'blogS', 'UserSer','$ngBootbox
 // }])
 
 //blog详情页面
-blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams', 'blogS', '$ngBootbox', '$location', function ($scope, $window, $routeParams, blogS, $ngBootbox, $location) {
+blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams', 'blogS', '$ngBootbox', '$location', function($scope, $window, $routeParams, blogS, $ngBootbox, $location) {
     $scope._id = $routeParams._id;
     $scope.flag = $routeParams.flag;
     //取得指定blog
-    $scope.getblog = function () {
-        blogS.getBlog($scope._id, $scope.flag).then(function (data) {
+    $scope.getblog = function() {
+        blogS.getBlog($scope._id, $scope.flag).then(function(data) {
             if (data.err) {
                 $ngBootbox.alert(data.msg);
                 $location.url('/index');
@@ -98,9 +110,9 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams
     $scope.getblog();
 
     //删除blog
-    $scope.delete = function () {
-        $ngBootbox.confirm("你确定删除" + $scope.blog.title).then(function () {
-            blogS.deleteBlog($scope._id).then(function (data) {
+    $scope.delete = function() {
+        $ngBootbox.confirm("你确定删除" + $scope.blog.title).then(function() {
+            blogS.deleteBlog($scope._id).then(function(data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
                     return;
@@ -108,12 +120,12 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams
                 $ngBootbox.alert(data.msg);
                 $location.url('/index')
             })
-        }, function () {
+        }, function() {
             console.log('不删除');
         })
     }
 
-    $scope.goBack = function () {
+    $scope.goBack = function() {
         $window.history.back()
     }
 }])
@@ -121,7 +133,7 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams
 
 //发布blog控制器
 blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
-    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
+    function($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
         $scope.search = {};
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
@@ -139,23 +151,23 @@ blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$w
 
         //socket.io实时更新
         $rootScope.socket = io('http://115.159.146.35:8000');
-        $rootScope.socket.on('contentS', function (data) {
+        $rootScope.socket.on('contentS', function(data) {
             $scope.contentC = data;
         });
-        $scope.change = function () {
+        $scope.change = function() {
             $rootScope.socket.emit('contentC', $scope.search.content);
         }
 
 
         //发布blog
-        $scope.postBlog = function () {
+        $scope.postBlog = function() {
             $scope.search.content = simplemde.value();
-            if(!$scope.search.content){
+            if (!$scope.search.content) {
                 $ngBootbox.alert('内容必须输入');
                 return;
             }
             $scope.search.labels = $scope.search.labels.split(" ")
-            blogS.postBlog($scope.search).then(function (data) {
+            blogS.postBlog($scope.search).then(function(data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
                     return;
@@ -165,19 +177,20 @@ blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$w
             })
         }
 
-    }])
+    }
+])
 
 
 //更新blog控制器
 blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope',
-    function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
+    function($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
         $scope.search = {};
         $scope._id = $routeParams._id;
         $scope.flag = $routeParams.flag;
         console.log($scope.flag);
 
 
-          //markdown语法解析
+        //markdown语法解析
         var simplemde = new SimpleMDE({
             renderingConfig: {
                 singleLineBreaks: false,
@@ -186,10 +199,10 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
             placeholder: "content...",
         })
 
-   
+
         //更新blog 
-        $scope.getblog = function () {
-            blogS.getBlog($scope._id, $scope.flag).then(function (data) {
+        $scope.getblog = function() {
+            blogS.getBlog($scope._id, $scope.flag).then(function(data) {
                 if (data.err) {
                     $ngBootbox.alert(data.msg);
                     return;
@@ -199,18 +212,18 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
                 $scope.search.title = data.blog.title;
                 $scope.search.labels = data.blog.labels.join(" ");
                 $scope.search.content = data.blog.content;
-               simplemde.value($scope.search.content);
+                simplemde.value($scope.search.content);
             })
         }
 
         $scope.getblog();
 
         $rootScope.socket = io('http://115.159.146.35:8000');
-        $rootScope.socket.on('contentS', function (data) {
+        $rootScope.socket.on('contentS', function(data) {
             console.log(data);
             $scope.contentC = data;
         });
-        $scope.change = function () {
+        $scope.change = function() {
             $rootScope.socket.emit('contentC', $scope.search.content);
         }
 
@@ -225,11 +238,11 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
         //     })
         // }, 9000)
 
-        $scope.update = function () {
+        $scope.update = function() {
             $scope.search.labels = $scope.search.labels.split(" ")
-            $ngBootbox.confirm("确定更新?").then(function () {
-              $scope.search.content = simplemde.value();
-                blogS.updateBlog($scope.search).then(function (data) {
+            $ngBootbox.confirm("确定更新?").then(function() {
+                $scope.search.content = simplemde.value();
+                blogS.updateBlog($scope.search).then(function(data) {
                     if (data.err) {
                         $ngBootbox.alert(data.msg);
                         return;
@@ -237,22 +250,23 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
                     $ngBootbox.alert(data.msg);
                     $location.url('/');
                 })
-            }, function () {
+            }, function() {
 
             })
         }
 
-    }])
+    }
+])
 
 
 
 
 //登陆控制器
 blogControllers.controller('LoginCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth', '$location',
-    function ($scope, UM, $ngBootbox, storage, Auth, $location) {
+    function($scope, UM, $ngBootbox, storage, Auth, $location) {
         $scope.search = {};
-        $scope.login = function () {
-            UM.login($scope.search.username, $scope.search.password).then(function (data) {
+        $scope.login = function() {
+            UM.login($scope.search.username, $scope.search.password).then(function(data) {
                 if (data.code == '999') {
                     $ngBootbox.alert(data.msg)
                     return;
@@ -265,28 +279,30 @@ blogControllers.controller('LoginCtrl', ['$scope', 'UM', '$ngBootbox', 'storage'
             })
         }
 
-    }])
+    }
+])
 
 
 
-    
+
 
 
 //登出控制器
 blogControllers.controller('LogoutCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth',
-    function ($scope, UM, $ngBootbox, storage, Auth) {
+    function($scope, UM, $ngBootbox, storage, Auth) {
         $scope.search = {};
-        $scope.logout = function () {
+        $scope.logout = function() {
             Auth.logout();
             $ngBootbox.alert('登出成功')
         }
         $scope.logout();
 
-    }])
+    }
+])
 
-    //登出控制器
+//登出控制器
 blogControllers.controller('TagCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth',
-    function ($scope, UM, $ngBootbox, storage, Auth) {
+    function($scope, UM, $ngBootbox, storage, Auth) {
         console.log('标签云')
-    }])
-
+    }
+])
