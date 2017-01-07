@@ -12,6 +12,9 @@
         <ul class="nav navbar-nav">
             <li><a href="#/index">主页</a></li>
             <li><a href="/blog#/postBlog">发布博文</a></li>
+            <li><a href="https://github.com/TimLiu1" target="_blank">github</a></li>
+
+           
             <li><a href="/blog#/tag">标签</a></li>
         </ul>
 
