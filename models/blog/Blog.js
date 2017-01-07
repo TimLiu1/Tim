@@ -17,6 +17,8 @@ let blogShema = new mongoose.Schema({
     title: String,
     //正文
     content: String,
+    //发布人
+    postMan: String,
     //标签
     labels: [],
     //创建日期
@@ -28,10 +30,10 @@ let blogShema = new mongoose.Schema({
 }, { collection: 'blog' });
 
 blogShema.plugin(updatedTimestamp);
-blogShema.plugin(autoIncrement.plugin,{
-    model:'blog',
+blogShema.plugin(autoIncrement.plugin, {
+    model: 'blog',
     field: 'order',
-    startAt:8
+    startAt: 8
 });
 blogShema.plugin(mongoosePaginate);
 
