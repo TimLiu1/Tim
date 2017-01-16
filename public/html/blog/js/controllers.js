@@ -124,7 +124,6 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams
     $scope.getblog();
     $scope.user = Auth.getUser();
     console.log("user"+JSON.stringify($scope.user));
-    console.log($scope.user.username)
     
 
     //删除blog
