@@ -51,7 +51,7 @@ module.exports = function(app) {
     })
 
     //查询指定blog
-    app.get('/getBlog', function(req, res, next) {
+    app.get('/getBlog', cors(), function(req, res, next) {
             logger.info('查询指定blog');
             let _id = req.query._id;
 
@@ -185,7 +185,7 @@ module.exports = function(app) {
     })
 
     //删除blog
-    app.get('/deleteBlog', function(req, res, next) {
+    app.get('/deleteBlog', cors(), function(req, res, next) {
         var _id = req.query._id;
         logger.info('删除博客' + _id);
         blog.remove({ _id: _id }, function(err) {
@@ -203,7 +203,7 @@ module.exports = function(app) {
 
 
     //更新blog
-    app.post('/updateBlog', function(req, res, next) {
+    app.post('/updateBlog',cors(), function(req, res, next) {
         var contentJson = req.body;
         var _id = req.body._id;
 
@@ -222,7 +222,7 @@ module.exports = function(app) {
     })
 
     //markdown语法转换器
-    app.post('/exchangeTitle', function(req, res, next) {
+    app.post('/exchangeTitle', cors(), function(req, res, next) {
         let content = "解析......";
         logger.info('解析')
         if (req.body.content) {
@@ -251,7 +251,7 @@ module.exports = function(app) {
     })
 
     // 通过月份查找blog
-    app.get('/searchByMonth', function(req, res) {
+    app.get('/searchByMonth', cors(), function(req, res) {
         let year = req.query.year;
         let month = req.query.month;
         let start = moment(year + '-' + month + '-01').startOf('month').toDate();;
