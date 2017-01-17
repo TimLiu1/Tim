@@ -73,7 +73,7 @@ module.exports = function(app) {
         //Auth.isAuthenticated(),
 
     //查询blog列表
-    app.post('/blogList', function(req, res, next) {
+    app.post('/blogList', cors(), function(req, res, next) {
         logger.info('查询blog列表'+JSON.stringify(req.body));
         logger.info(req.headers);
         let conditionPage = {}
