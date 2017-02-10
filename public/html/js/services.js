@@ -79,12 +79,6 @@ sysServices.factory('authInterceptor', ['storage', '$location', function (storag
             };
             if (storage.local.getValue('jwtToken')) {
                 config.headers.Authorization = 'Tim ' + storage.local.getValue('jwtToken');
-                if (storage.local.getObject('user')) {
-                    console.log('存在用户');
-                    console.log("-->"+JSON.stringify(storage.local.getObject('user')));
-
-                    config.headers.user = storage.local.getObject('user');
-                }
             }
             return config;
         },

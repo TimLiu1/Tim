@@ -75,7 +75,6 @@ module.exports = function(app) {
     //查询blog列表
     app.post('/blogList', cors(), function(req, res, next) {
         logger.info('查询blog列表'+JSON.stringify(req.body));
-        logger.info(req.headers);
         let conditionPage = {}
         let LIMIT = 5;
         let currentPage = 1;
