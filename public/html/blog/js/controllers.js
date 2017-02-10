@@ -11,12 +11,12 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
         $scope.flag = 0;
 
         console.log("登出程序启动")
-
-        $scope.logoutFlag = $location.search().logoutFlag;
-        console.log($scope.logoutFlag);
-        if ($scope.logoutFlag == 'logout') {
-            Auth.logout();
-        }
+        Auth.logout();
+        // $scope.logoutFlag = $location.search().logoutFlag;
+        // console.log($scope.logoutFlag);
+        // if ($scope.logoutFlag == 'logout') {
+        //     Auth.logout();
+        // }
         //   获取blog列表
         $scope.getBlogList = function () {
             $scope.search.currentPage = $scope.currentPage;
@@ -107,7 +107,7 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
 // }])
 
 //blog详情页面
-blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams', 'blogS', '$ngBootbox', '$location','Auth',function ($scope, $window, $routeParams, blogS, $ngBootbox, $location,Auth) {
+blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams', 'blogS', '$ngBootbox', '$location', 'Auth', function ($scope, $window, $routeParams, blogS, $ngBootbox, $location, Auth) {
     $scope._id = $routeParams._id;
     $scope.flag = $routeParams.flag;
     //取得指定blog
@@ -123,8 +123,8 @@ blogControllers.controller('BlogDetailCtrl', ['$scope', '$window', '$routeParams
     }
     $scope.getblog();
     $scope.user = Auth.getUser();
-    console.log("user"+JSON.stringify($scope.user));
-    
+    console.log("user" + JSON.stringify($scope.user));
+
 
     //删除blog
     $scope.delete = function () {
