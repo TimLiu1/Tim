@@ -9,8 +9,8 @@
       "databaseConfig": {
         // "host": "localhost"
         "host": "123.206.217.94",
-        "database": "Tim"
-        // "options": {"user": "tim", "pass": "1qaz2wsx"}
+        "database": "Tim",
+        "options": {"user": "tim", "pass": "1qaz2wsx"}
     },
 
     
