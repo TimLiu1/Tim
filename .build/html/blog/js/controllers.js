@@ -167,13 +167,13 @@ blogControllers.controller('PostBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '$w
 
 
         //socket.io实时更新
-        $rootScope.socket = io('http://115.159.146.35:8000');
-        $rootScope.socket.on('contentS', function (data) {
-            $scope.contentC = data;
-        });
-        $scope.change = function () {
-            $rootScope.socket.emit('contentC', $scope.search.content);
-        }
+        // $rootScope.socket = io('http://115.159.146.35:8000');
+        // $rootScope.socket.on('contentS', function (data) {
+        //     $scope.contentC = data;
+        // });
+        // $scope.change = function () {
+        //     $rootScope.socket.emit('contentC', $scope.search.content);
+        // }
 
 
         //发布blog
@@ -235,14 +235,14 @@ blogControllers.controller('UpdateBlogCtrl', ['$scope', 'blogS', '$ngBootbox', '
 
         $scope.getblog();
 
-        $rootScope.socket = io('http://115.159.146.35:8000');
-        $rootScope.socket.on('contentS', function (data) {
-            console.log(data);
-            $scope.contentC = data;
-        });
-        $scope.change = function () {
-            $rootScope.socket.emit('contentC', $scope.search.content);
-        }
+        // $rootScope.socket = io('http://115.159.146.35:8000');
+        // $rootScope.socket.on('contentS', function (data) {
+        //     console.log(data);
+        //     $scope.contentC = data;
+        // });
+        // $scope.change = function () {
+        //     $rootScope.socket.emit('contentC', $scope.search.content);
+        // }
 
         // setInterval(function () {
         //     console.log($scope.search);
