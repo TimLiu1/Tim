@@ -12,11 +12,11 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
 
         console.log("登出程序启动")
 
-        // $scope.logoutFlag = $location.search().logoutFlag;
-        // console.log($scope.logoutFlag);
-        // if ($scope.logoutFlag == 'logout') {
-        //     Auth.logout();
-        // }
+        $scope.logoutFlag = $location.search().logoutFlag;
+        console.log($scope.logoutFlag);
+        if ($scope.logoutFlag == 'logout') {
+            Auth.logout();
+        }
         //   获取blog列表
         $scope.getBlogList = function () {
             $scope.search.currentPage = $scope.currentPage;
