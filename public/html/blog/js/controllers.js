@@ -11,7 +11,7 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
         $scope.flag = 0;
 
         console.log("登出程序启动")
-        Auth.logout();
+        // Auth.logout();
         // $scope.logoutFlag = $location.search().logoutFlag;
         // console.log($scope.logoutFlag);
         // if ($scope.logoutFlag == 'logout') {
