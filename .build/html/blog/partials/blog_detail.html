@@ -4,10 +4,10 @@
  <ul class="nav navbar-nav">
             <!--<li><a href="" ng-show="user.username == blog.postMan" ng-click="delete()">删除</a></li>
             <li><a  ng-show="user.username == blog.postMan"  href="#/updateBlog/{{_id}}">更新</a></li>-->
-            <li><a href="" ng-show="user.username == 'timliu'" ng-click="delete()">删除</a></li>
+            <li><a href="" ng-show="user.username == blog.postMan" ng-click="delete()">删除</a></li>
             <li><a  ng-show="user.username == 'timliu'"  href="#/updateBlog/{{_id}}">更新</a></li>
             <li><a href="#">标签</a></li>
-            <li ><a>作者: Tim</a></li>
+            <li ><a>作者: {{blog.postMan}}</a></li>
             <li ><a>发布时间: {{blog.createdAt | date: "yyyy-MM-dd"}}</a></li>
            </ul>
   </div>

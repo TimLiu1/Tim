@@ -40,7 +40,10 @@ module.exports = function(app) {
         //发布博文
     app.post('/blog', Auth.isAuthenticated(), function(req, res, next) {
         logger.info('发布文章')
+        logger.info('发布文章user'+JSON.stringify(req.user));
         let articleJson = req.body;
+        articleJson.postMan = req.user.username;
+
         let article = new blog(articleJson);
         article.save(function(err, result) {
             if (err) {
