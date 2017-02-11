@@ -14,7 +14,8 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
         $scope.logoutFlag = $location.search().logoutFlag;
         console.log("登出程序启动" + $scope.logoutFlag)
         console.log($scope.logoutFlag);
-        if ($scope.logoutFlag == 'logout') {
+        if ($scope.logoutFlag === 'logout') {
+            console.log("奇怪的事发生了")
             Auth.logout();
         }
         //   获取blog列表
@@ -56,10 +57,10 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
             if (!$scope.search.username || !$scope.search.password || !$scope.search.rePassword) {
                 $ngBootbox.alert("请填写所有必填项");
                 return;
-            } else if ($scope.search.password.length !=$scope.search.rePassword ) {
+            } else if ($scope.search.password.length != $scope.search.rePassword) {
                 $ngBootbox.alert("两次密码不一致");
                 return;
-            }else if ($scope.search.password.length < 6) {
+            } else if ($scope.search.password.length < 6) {
                 $ngBootbox.alert("密码必须大于6位");
                 return;
             } else {
@@ -73,11 +74,10 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
         }
         $scope.getUser = function () {
             $rootScope.user = Auth.getUser('user');
-            console.log($rootScope.user);
         }
         $scope.getUser();
 
-        console.log("user" + JSON.stringify(Auth.getUser('user')));
+
 
 
         $scope.login = function () {
@@ -91,6 +91,7 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
                         var user = data.data.user;
                         $rootScope.user = user;
                         Auth.setUser(user);
+                        console.log("user" + JSON.stringify(Auth.getUser('user')));
                         Auth.setToken(data.data.user.token);
                     } else {
                         $ngBootbox.alert(data.data.msg);
