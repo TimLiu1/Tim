@@ -15,6 +15,7 @@ let logger = require('log4js').getLogger('tim');
 let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
 let Auth = require('../../../lib/auth');
+let email = require('../../../lib/email');
 let SIO = require('../../../lib/SIO');
 
 marked.setOptions({
@@ -26,26 +27,26 @@ marked.setOptions({
     sanitize: false,
     smartLists: false,
     smartypants: false,
-    highlight: function(code) {
+    highlight: function (code) {
         return hljs.highlightAuto(code).value;
     }
 });
 var renderer = new marked.Renderer();
-renderer.table = function(header, body) {
+renderer.table = function (header, body) {
     return '<table class="table table-striped">' + header + body + '</table>'
 }
 
-module.exports = function(app) {
+module.exports = function (app) {
     app.options('*', cors())
-        //发布博文
-    app.post('/blog', Auth.isAuthenticated(), function(req, res, next) {
+    //发布博文
+    app.post('/blog', Auth.isAuthenticated(), function (req, res, next) {
         logger.info('发布文章')
-        logger.info('发布文章user'+JSON.stringify(req.user));
+        logger.info('发布文章user' + JSON.stringify(req.user));
         let articleJson = req.body;
         articleJson.postMan = req.user.username;
 
         let article = new blog(articleJson);
-        article.save(function(err, result) {
+        article.save(function (err, result) {
             if (err) {
                 next()
             }
@@ -54,30 +55,30 @@ module.exports = function(app) {
     })
 
     //查询指定blog
-    app.get('/getBlog', cors(), function(req, res, next) {
-            logger.info('查询指定blog');
-            let _id = req.query._id;
+    app.get('/getBlog', cors(), function (req, res, next) {
+        logger.info('查询指定blog');
+        let _id = req.query._id;
 
-            blog.findById(_id).exec().then((result) => {
-                return result;
-            }).then((result) => {
-                if (req.query.flag && req.query.flag == '1') {
-                    result.content = marked(result.content);
-                }
-                let model = {
-                    code: '000',
-                    blog: result,
-                }
-                res.json(model)
-            }).catch((err) => {
-                res.json({ code: '999', msg: '查询数据库出错' + err });
-            })
+        blog.findById(_id).exec().then((result) => {
+            return result;
+        }).then((result) => {
+            if (req.query.flag && req.query.flag == '1') {
+                result.content = marked(result.content);
+            }
+            let model = {
+                code: '000',
+                blog: result,
+            }
+            res.json(model)
+        }).catch((err) => {
+            res.json({ code: '999', msg: '查询数据库出错' + err });
         })
-        //Auth.isAuthenticated(),
+    })
+    //Auth.isAuthenticated(),
 
     //查询blog列表
-    app.post('/blogList', cors(), function(req, res, next) {
-        logger.info('查询blog列表'+JSON.stringify(req.body));
+    app.post('/blogList', cors(), function (req, res, next) {
+        logger.info('查询blog列表' + JSON.stringify(req.body));
         let conditionPage = {}
         let LIMIT = 5;
         let currentPage = 1;
@@ -112,14 +113,14 @@ module.exports = function(app) {
         }
 
         async.parallel([
-            function(cb) {
+            function (cb) {
                 blog.count().then((blog_count) => {
                     cb(null, blog_count)
                 }).catch((err) => {
                     return cb(err)
                 })
             },
-            function(cb) {
+            function (cb) {
                 blog.paginate(condition, conditionPage, (err, blogs) => {
                     if (err) {
                         return cb(err)
@@ -128,7 +129,7 @@ module.exports = function(app) {
                 })
 
             },
-            function(cb) {
+            function (cb) {
                 blog.aggregate([conditionJson, conditionGroup], (err, blogList) => {
 
                     if (err) {
@@ -140,7 +141,7 @@ module.exports = function(app) {
 
 
             }
-        ], function(err, results) {
+        ], function (err, results) {
             if (err) {
                 logger.info('处理数据库列表出错' + err);
                 res.json({ code: '999', msg: '处理数据库列表出错,稍后重试' })
@@ -187,10 +188,10 @@ module.exports = function(app) {
     })
 
     //删除blog
-    app.get('/deleteBlog', cors(), function(req, res, next) {
+    app.get('/deleteBlog', cors(), function (req, res, next) {
         var _id = req.query._id;
         logger.info('删除博客' + _id);
-        blog.remove({ _id: _id }, function(err) {
+        blog.remove({ _id: _id }, function (err) {
             if (err) {
                 logger.info("查询数据库出错" + err);
                 res.json({ code: '999', msg: '查询数据库失败' + err })
@@ -205,12 +206,12 @@ module.exports = function(app) {
 
 
     //更新blog
-    app.post('/updateBlog',cors(), function(req, res, next) {
+    app.post('/updateBlog', cors(), function (req, res, next) {
         var contentJson = req.body;
         var _id = req.body._id;
 
         logger.info('更新博客' + _id);
-        blog.update({ _id: _id }, { $set: contentJson }, function(err) {
+        blog.update({ _id: _id }, { $set: contentJson }, function (err) {
             if (err) {
                 logger.info("更新数据库出错" + err);
                 res.json({ code: '999', msg: '更新数据库失败' + err })
@@ -224,7 +225,7 @@ module.exports = function(app) {
     })
 
     //markdown语法转换器
-    app.post('/exchangeTitle', cors(), function(req, res, next) {
+    app.post('/exchangeTitle', cors(), function (req, res, next) {
         let content = "解析......";
         logger.info('解析')
         if (req.body.content) {
@@ -253,7 +254,7 @@ module.exports = function(app) {
     })
 
     // 通过月份查找blog
-    app.get('/searchByMonth', cors(), function(req, res) {
+    app.get('/searchByMonth', cors(), function (req, res) {
         let year = req.query.year;
         let month = req.query.month;
         let start = moment(year + '-' + month + '-01').startOf('month').toDate();;
@@ -261,6 +262,20 @@ module.exports = function(app) {
         let condition = {
 
         }
+    })
+
+
+    app.get('/email', function (req, res) {
+        var mailOptions = {
+            to: '18818216454@163.com', // 接受者,可以同时发送多个,以逗号隔开  
+            subject: 'nodemailer2.5.0邮件发送', // 标题  
+            //text: 'Hello world', // 文本  
+            html: `<h2>nodemailer基本使用:</h2><h3>  
+    <a href="http://blog.csdn.net/zzwwjjdj1/article/details/51878392">  
+    http://blog.csdn.net/zzwwjjdj1/article/details/51878392</a></h3>`
+        };
+        email.send(mailOptions);
+    
     })
 
 }

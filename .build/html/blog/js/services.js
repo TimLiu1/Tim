@@ -37,6 +37,7 @@ blogServices.factory('blogS', ['$http', function ($http) {
         exchangeTitle: function (obj) {
             return $http.post(HOST + 'exchangeTitle', obj).then(responseSuccess, responseError);
         },
+         
 
     }
 }])
@@ -45,6 +46,9 @@ blogServices.factory('UserSer', ['$http', function ($http) {
     return {
         sign: function (blog) { //发表blog
             return $http.post(api + 'sign', blog).then(responseSuccess, responseError);
+        },
+        findPassword: function (obj) {
+            return $http.post(api + 'findPassword', obj).then(responseSuccess, responseError);
         },
     }
 }])

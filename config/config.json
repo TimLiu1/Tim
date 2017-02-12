@@ -1,5 +1,4 @@
 {
-
     "loggerLevel": "info",
     "express": {
         "view cache": false,
@@ -7,36 +6,37 @@
         "views": "path:./.build/templates"
     },
 
-  
-       
-    
+    "emailConfig": {
+        "tim": {
+            "service": "qq",
+            "host": "smtp.qq.com",
+            "user": "995332120@qq.com",
+            "password": "Srzh201314",
+            "fromMail": "Tim's blog<995332120@qq.com>",
+            "maxConnections": 10,
+            "port": 465,
+            "secure": true
+        }
+    },
     "view engines": {
         "js": {
             "module": "makara",
             "renderer": {
                 "method": "js",
                 "arguments": [
-                    { "cache": true, "helpers": "config:dust.helpers" }
+                    {
+                        "cache": true,
+                        "helpers": "config:dust.helpers"
+                    }
                 ]
             }
         }
     },
-
     "dust": {
-        "helpers": [
-    
-        ]
+        "helpers": []
     },
-    
-
-    
-
-    "specialization": {
-    },
-
+    "specialization": {},
     "middleware": {
-
-        
         "makara": {
             "priority": 100,
             "enabled": true,
@@ -47,7 +47,7 @@
                         "i18n": "config:i18n",
                         "specialization": "config:specialization"
                     },
-                     {
+                    {
                         "csrf": false,
                         "xframe": "SAMEORIGIN",
                         "p3p": false,
@@ -56,20 +56,23 @@
                 ]
             }
         },
-
-
         "static": {
             "module": {
-                "arguments": [ "path:./.build" ]
+                "arguments": [
+                    "path:./.build"
+                ]
             }
         },
-
         "router": {
             "module": {
-                "arguments": [{ "directory": "path:./controllers" }]
+                "arguments": [
+                    {
+                        "directory": "path:./controllers"
+                    }
+                ]
             }
         },
-         /**
+        /**
          * Override the default lusca configuration to disable CSRF handling.
          */
         "appsec": {
@@ -83,7 +86,6 @@
                 ]
             }
         },
-
         /**
          * Enable *ONLY* CSRF filtered by route.
          * Note: The route "regex" needs the double parens
@@ -96,9 +98,10 @@
             "module": {
                 "name": "lusca",
                 "method": "csrf",
-                "arguments": [ {} ]
+                "arguments": [
+                    {}
+                ]
             }
         }
-
     }
 }

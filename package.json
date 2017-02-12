@@ -17,6 +17,7 @@
     "construx-copier": "^1.0.0",
     "construx-dustjs": "^1.1.0",
     "cors": "^2.8.1",
+    "crypto": "^0.0.3",
     "eslint": "^1.10.3",
     "express": "^4.12.2",
     "highlight": "^0.2.4",
@@ -27,11 +28,15 @@
     "makara": "^2.0.3",
     "markdown": "^0.5.0",
     "marked": "^0.3.6",
+    "md5": "^2.2.1",
     "moment": "^2.15.0",
     "mongoose": "^4.6.0",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-paginate": "^5.0.0",
     "mongoose-updated_at": "0.0.2",
+    "nodemailer": "1.11.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "socket.io": "^1.4.8"
   },
   "devDependencies": {

@@ -5,7 +5,8 @@
                 <h6>
                     <a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
                 </h6>
-                <small class="blog-small">标签: </small><a ng-click="getLable(this.label)" href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
+                <small class="blog-small">标签: </small>
+                <a ng-click="getLable(this.label)" href="" ng-repeat="label in blog.labels" class="label label-success blog-lable">{{label}}</a>
                 <small class="blog-small">发表日期: </small><span style="font-size: 12px">{{blog.createdAt | date:'yyyy-MM-dd'}}</span>
                 <p ng-bind-html="blog.content | trust"></p>
                 <p>
@@ -19,12 +20,19 @@
                     <h6>登录</h6><br/>
                     <h7>登录后可发布自己的blog</h7>
                     <div class="form-group"></div>
+                    <div style="display: inline-flex">
+                        <p style=" margin-right: 30px"><a href="" ng-click="changeFlag(1)">注册</a></p>
 
-                    <p><a href="" ng-click="changeFlag(1)">注册</a></p>
-                    <p><a href="" ng-click="changeFlag(0)">登录</a></p>
+                        <p><a href="" ng-click="changeFlag(0)">登录</a></p>
+                    </div>
+              <div><a style="font-size: 10px;" href="#/findPassword">忘记密码</a><div>
+                    
                 </dl>
                 <dl>
-                    <input class="input" style="margin-top:10px; width:300px;" ng-model="search.username" type="text" placeholder="用户名">
+                    <input class="input" style="margin-top:10px; width:300px;" ng-model="search.username" type="text" placeholder="用户名/邮箱">
+                </dl>
+                <dl ng-show="flag == 1">
+                    <input class="input" style="margin-top:10px; width:300px;" ng-model="search.email" type="text" placeholder="邮箱(决定头像和找回密码)">
                 </dl>
                 <dl>
                     <input class="input" style="margin-top:10px;  width:300px;" ng-model="search.password" type="password" placeholder="密码">
@@ -45,17 +53,17 @@
             <div class="me" ng-show="user">
                 <dl>
                     <dt>
-						<img src="/images/me.jpg" class="blog-me">
-						<h6 class="me_name">
-							<a href="">{{user.username}}</a>
-						</h6>
-					</dt>
+                        <img src={{user.headImage}} class="blog-me">
+                        <h6 class="me_name">
+                            <a href="">{{user.username}}</a>
+                        </h6>
+                    </dt>
                     <dt class="me_intro">
-						<h7>职位: super_root</h7><br>
-						<h7>擅长: <span class="label label-success " style="margin-right: 10px">nodejs</span><span class="label label-success ">mongodb</span></h7>
-						<br>
-						<h7>发表: {{blog_count}}</h7>
-					</dt>
+                        <h7>职位: super_root</h7><br>
+                        <h7>擅长: <span class="label label-success " style="margin-right: 10px">nodejs</span><span class="label label-success ">mongodb</span></h7>
+                        <br>
+                        <h7>发表: {{blog_count}}</h7>
+                    </dt>
                 </dl>
 
             </div>
@@ -63,7 +71,8 @@
 
             <div class="title_recent" style="margin-top: 15px">
                 <div class="input-group">
-                    <input type="text" ng-model="search.title" class="form-control input-lg"><span ng-click="getBlogList()" class="input-group-addon btn btn-primary">搜索</span>
+                    <input type="text" ng-model="search.title" class="form-control input-lg">
+                    <span ng-click="getBlogList()" class="input-group-addon btn btn-primary">搜索</span>
                 </div>
             </div>
 
@@ -75,8 +84,8 @@
                 </div>
                 <dl>
                     <dt ng-repeat="blog in blogs">
-						<a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
-					</dt>
+                        <a href="#/blogDetail/{{blog._id}}/1">{{blog.title}}</a>
+                    </dt>
                 </dl>
             </div>
 
@@ -88,8 +97,8 @@
                 </div>
                 <dl>
                     <dt ng-repeat="blog in blogList">
-						<a href="" ng-click="searchByMonth(this.blog._id.year,this.blog._id.month)">{{blog.time}}</a>({{blog.sum}})
-					</dt>
+                        <a href="" ng-click="searchByMonth(this.blog._id.year,this.blog._id.month)">{{blog.time}}</a>({{blog.sum}})
+                    </dt>
                 </dl>
             </div>
 
@@ -98,6 +107,7 @@
 
     </div>
 
-    <uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize" class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-        boundary-links="true" ng-change="getBlogList()"></uib-pagination>
+    <uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" max-size="10" items-per-page="pageSize"
+        class="pagination-sm" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+        last-text="&raquo;" boundary-links="true" ng-change="getBlogList()"></uib-pagination>
 </div>

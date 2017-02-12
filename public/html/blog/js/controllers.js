@@ -15,8 +15,9 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
         console.log("登出程序启动" + $scope.logoutFlag)
         console.log($scope.logoutFlag);
         if ($scope.logoutFlag === 'logout') {
-            console.log("奇怪的事发生了")
             Auth.logout();
+            $location.url('/index')
+
         }
         //   获取blog列表
         $scope.getBlogList = function () {
@@ -54,10 +55,10 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
         }
 
         $scope.register = function (flag) {
-            if (!$scope.search.username || !$scope.search.password || !$scope.search.rePassword) {
+            if (!$scope.search.username || !$scope.search.email || !$scope.search.password || !$scope.search.rePassword) {
                 $ngBootbox.alert("请填写所有必填项");
                 return;
-            } else if ($scope.search.password.length != $scope.search.rePassword) {
+            } else if ($scope.search.password != $scope.search.rePassword) {
                 $ngBootbox.alert("两次密码不一致");
                 return;
             } else if ($scope.search.password.length < 6) {
@@ -76,10 +77,6 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
             $rootScope.user = Auth.getUser('user');
         }
         $scope.getUser();
-
-
-
-
         $scope.login = function () {
             if (!$scope.search.username || !$scope.search.password) {
                 $ngBootbox.alert("请填写所有必填项");
@@ -311,6 +308,27 @@ blogControllers.controller('LoginCtrl', ['$scope', 'UM', '$ngBootbox', 'storage'
 
     }
 ])
+
+//找回密码控制器
+blogControllers.controller('FindPasswordCtrl', ['$scope', 'UserSer', '$ngBootbox', 'storage', 'Auth', '$location',
+    function ($scope, UserSer, $ngBootbox, storage, Auth, $location) {
+        $scope.search = {};
+        $scope.findPassword = function () {
+            console.log("找回密码")
+            UserSer.findPassword($scope.search).then(function (data) {
+                if (data.code == '999') {
+                    $ngBootbox.alert(data.msg)
+                    return;
+                }
+                $ngBootbox.alert('发送成功,请登录邮箱查看');
+                $location.url('/index');
+
+            })
+        }
+
+    }
+])
+
 
 
 
