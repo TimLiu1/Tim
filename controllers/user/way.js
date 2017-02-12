@@ -1,5 +1,5 @@
 'use strict'
-
+const crypto = require('crypto');
 //获取头像
 exports.headImage = function (obj) {
     let md5 = crypto.createHash('md5');
