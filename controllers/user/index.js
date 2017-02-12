@@ -5,6 +5,7 @@ let User = require('../../models/User');
 let Auth = require('../../lib/auth');
 let email = require('../../lib/email');
 let service = require('./service');
+let way = require('./way');
 
 var Promise = require('bluebird');
 let co = require('co');
@@ -27,7 +28,7 @@ module.exports = function (app) {
             signCondition.username = body.username;
             signCondition.password = body.password;
             signCondition.email = body.email;
-            signCondition.headImage = service.headImage(body);
+            signCondition.headImage = way.headImage(body);
             let userOne = yield User.findOne({ username: username });
             if (userOne) { return Promise.reject("该用户已被注册") };
             userOne = yield User.findOne({ email: body.email });

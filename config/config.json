@@ -5,7 +5,6 @@
         "view engine": "js",
         "views": "path:./.build/templates"
     },
-
     "emailConfig": {
         "tim": {
             "service": "qq",
@@ -16,6 +15,13 @@
             "maxConnections": 10,
             "port": 465,
             "secure": true
+        }
+    },
+    "oss": {
+        "tim": {
+            "region": "oss-cn-shanghai",
+            "accessKeyId": "LTAIvWyXwy6LwMKi",
+            "accessKeySecret": "QaucOO51i55dLUBolkJgs7p2qBn7oC"
         }
     },
     "view engines": {
