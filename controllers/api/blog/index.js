@@ -16,7 +16,7 @@ let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
 let Auth = require('../../../lib/auth');
 let email = require('../../../lib/email');
-let Message = require('../../../lib/message');
+let Message = require('../../../lib/shortMessage');
 let SIO = require('../../../lib/SIO');
 
 marked.setOptions({
