@@ -10,6 +10,7 @@
     "all": "npm run build && npm run test"
   },
   "dependencies": {
+    "alidayu-node": "^1.0.3",
     "async": "^2.0.1",
     "bluebird": "^3.4.6",
     "co": "^4.6.0",

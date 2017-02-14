@@ -24,6 +24,12 @@
             "accessKeySecret": "QaucOO51i55dLUBolkJgs7p2qBn7oC"
         }
     },
+      "message": {
+        "tim": {
+            "appKey": "23633805",
+            "secret": "37bbb4c63a071f888a7b3eecbc808f07"
+        }
+    },
     "view engines": {
         "js": {
             "module": "makara",

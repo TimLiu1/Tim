@@ -16,6 +16,7 @@ let hljs = require('highlight.js');
 let blog = require('../../../models/blog/Blog');
 let Auth = require('../../../lib/auth');
 let email = require('../../../lib/email');
+let Message = require('../../../lib/message');
 let SIO = require('../../../lib/SIO');
 
 marked.setOptions({
@@ -264,18 +265,19 @@ module.exports = function (app) {
         }
     })
 
-
-    app.get('/email', function (req, res) {
-        var mailOptions = {
-            to: '18818216454@163.com', // 接受者,可以同时发送多个,以逗号隔开  
-            subject: 'nodemailer2.5.0邮件发送', // 标题  
-            //text: 'Hello world', // 文本  
-            html: `<h2>nodemailer基本使用:</h2><h3>  
-    <a href="http://blog.csdn.net/zzwwjjdj1/article/details/51878392">  
-    http://blog.csdn.net/zzwwjjdj1/article/details/51878392</a></h3>`
-        };
-        email.send(mailOptions);
-    
+    app.get('/message', function (req, res) {
+        logger.info("发送短信")
+        let message = {
+            sms_free_sign_name: 'Tim的博客',
+            sms_param: { "code": "123456", "name": "刘祖宽" },
+            rec_num: '18818216454',
+            sms_template_code: 'SMS_46340179'
+        }
+        Message.send(message, function (err, result) {
+            console.log(result)
+        })
     })
 
 }
+
+

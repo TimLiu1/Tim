@@ -21,4 +21,17 @@ exports.sendEmail = function (obj, cb) {
 }
 
 
+exports.shortMessage = (obj,cb) => {
+    logger.info("发送短信")
+    console.log(Math.random().toString().slice(-7));
+    let message = {
+        sms_free_sign_name: sms_free_sign_name,
+        sms_param: sms_param,
+        rec_num: rec_num,
+        sms_template_code: sms_template_code
+    }
+    Message.send(message, function (err, result) {
+        console.log(result)
+    })
+}
 
