@@ -3,12 +3,35 @@ var blogControllers = angular.module('blogControllers', []);
 
 
 //主页控制器
-blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope', 'UM', 'Auth', '$location',
-    function (storage, $scope, blogS, UserSer, $ngBootbox, $window, $location, $routeParams, $rootScope, UM, Auth, $location) {
+blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer', '$ngBootbox', '$window', '$location', '$routeParams', '$rootScope', 'UM', 'Auth', '$location', "$interval",
+    function (storage, $scope, blogS, UserSer, $ngBootbox, $window, $location, $routeParams, $rootScope, UM, Auth, $location, $interval) {
         $scope.search = {};
         $scope.currentPage = 1;
         $scope.search.title = $routeParams.flag;
         $scope.flag = 0;
+        $scope.showButton = 0
+
+
+        $scope.startTime = function () {
+            $scope.sendCode();
+            $scope.showtime = "60秒"
+            $scope.showButton = 1;
+            $scope.timerCount = 60000
+            $scope.i = setInterval(function () {
+                $scope.showtime = $scope.timerCount / 1000 + "秒"
+                if ($scope.timerCount == 0) {
+                    clearTimeout($scope.i);
+                    $scope.showtime = "60秒"
+                    $scope.showButton = 0;
+                }
+            }, 1000)
+
+        }
+        var counter = $interval(function () {
+            $scope.timerCount = $scope.timerCount - 1000;
+            $scope.showtime = $scope.timerCount / 1000 + "秒"
+        }, 1000);
+
 
         // Auth.logout();
         $scope.logoutFlag = $location.search().logoutFlag;
@@ -54,30 +77,76 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
             $scope.flag = flag
         }
 
-        $scope.register = function (flag) {
-            if (!$scope.search.username || !$scope.search.email || !$scope.search.password || !$scope.search.rePassword) {
-                $ngBootbox.alert("请填写所有必填项");
-                return;
-            } else if ($scope.search.password != $scope.search.rePassword) {
-                $ngBootbox.alert("两次密码不一致");
-                return;
-            } else if ($scope.search.password.length < 6) {
-                $ngBootbox.alert("密码必须大于6位");
-                return;
-            } else {
-                UserSer.sign($scope.search).then(function (data) {
-                    if (data) {
-                        $ngBootbox.alert("注册成功");
-                        $scope.flag = 0;
-                    }
-                })
-            }
+        //获取验证码
+        $scope.sendCode = function () {
+            console.log("发送验证码")
+            UserSer.sendCode($scope.search).then(function (data) {
+                $scope.data = data;
+                console.log(data);
+            })
         }
+
+
+
+
+        //注册
+        $scope.register = function (flag) {
+            $scope.search.flag = $scope.flag;
+            if ($scope.flag == 2) {
+                if ($scope.data.sendCode != $scope.search.code) {
+                    $ngBootbox.alert("验证码错误");
+                    return;
+                }
+                if (!$scope.search.mobile || !$scope.search.password || !$scope.search.rePassword) {
+                    $ngBootbox.alert("请填写所有必填项");
+                    return;
+                } else if ($scope.search.password != $scope.search.rePassword) {
+                    $ngBootbox.alert("两次密码不一致");
+                    return;
+                } else if ($scope.search.password.length < 6) {
+                    $ngBootbox.alert("密码必须大于6位");
+                    return;
+                } else {
+                    UserSer.sign($scope.search).then(function (data) {
+                        if (data) {
+                            $ngBootbox.alert("注册成功");
+                            $scope.flag = 0;
+                        }
+                    })
+                }
+            } else {
+                if (!$scope.search.username || !$scope.search.email || !$scope.search.password || !$scope.search.rePassword) {
+                    $ngBootbox.alert("请填写所有必填项");
+                    return;
+                } else if ($scope.search.password != $scope.search.rePassword) {
+                    $ngBootbox.alert("两次密码不一致");
+                    return;
+                } else if ($scope.search.password.length < 6) {
+                    $ngBootbox.alert("密码必须大于6位");
+                    return;
+                } else {
+                    UserSer.sign($scope.search).then(function (data) {
+                        if (data) {
+                            $ngBootbox.alert("注册成功");
+                            $scope.flag = 0;
+                        }
+                    })
+                }
+            }
+
+        }
+
+
+        //获取用户信息
         $scope.getUser = function () {
             $rootScope.user = Auth.getUser('user');
         }
         $scope.getUser();
+
+
+        //登录
         $scope.login = function () {
+            console.log($scope.search);
             if (!$scope.search.username || !$scope.search.password) {
                 $ngBootbox.alert("请填写所有必填项");
                 return;
@@ -97,17 +166,13 @@ blogControllers.controller('BlogCtrl', ['storage', '$scope', 'blogS', 'UserSer',
             }
         }
 
+
+
     }
 ])
 
 
-// blogControllers.controller('headController', ['$scope', '$location', '$routeParams',
-// function ($scope, blogS, $ngBootbox, $window, $location, $routeParams, $rootScope) {
-//     //   获取blog列表
-//     $scope.getBlogList = function () {
-//        $location.url('/index/'+$scope.search.title);
-//     }
-// }])
+
 
 //blog详情页面
 blogControllers.controller('BlogDetailCtrl', ['$rootScope', '$scope', '$window', '$routeParams', 'blogS', '$ngBootbox', '$location', 'Auth', function ($rootScope, $scope, $window, $routeParams, blogS, $ngBootbox, $location, Auth) {

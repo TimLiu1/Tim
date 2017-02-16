@@ -50,5 +50,8 @@ blogServices.factory('UserSer', ['$http', function ($http) {
         findPassword: function (obj) {
             return $http.post(api + 'findPassword', obj).then(responseSuccess, responseError);
         },
+         sendCode: function (obj) {
+            return $http.post(api + 'sendCode', obj).then(responseSuccess, responseError);
+        },
     }
 }])

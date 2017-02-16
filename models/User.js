@@ -8,6 +8,8 @@ let userSchema = new mongoose.Schema({
     username: String,
     //邮箱
     email: String,
+    //手机
+    mobile: String,
     // 头像
     headImage: String,
     //密码
