@@ -61,6 +61,7 @@ module.exports = function (app) {
             let signCondition = {};
             let password = body.password;
             signCondition.mobile = body.mobile;
+            signCondition.username = body.username;
             signCondition.password = body.password;
             signCondition.headImage = 'http://www.gravatar.com/avatar/03bb2effa687bada0f40f26bae3dfc11?s=48';
             let userOne = yield User.findOne({ mobile: body.mobile });
