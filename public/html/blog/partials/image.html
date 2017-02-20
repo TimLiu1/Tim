@@ -1,0 +1,28 @@
+<div style="width: 80%" class="container-fluid">
+
+<div style="height: 50%" class="container kv-main">
+
+    <form enctype="multipart/form-data" id="addForm">
+        <div class="form-group">
+            <!--<label>图片上传</label>-->
+            <input id="file" type="file" class="file" name="file" multiple="true" ,accept="image/*">
+        </div>
+    </form>
+</div>
+<div class="panel panel-primary" style="margin-bottom:0;">
+    <div class="panel-heading">上传结果</div>
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th class="col-sm-1">名称</th>
+                <th class="col-sm-6">url</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="url in urls">
+                <td class="col-sm-1">{{url.name}}</td>
+                <td class="col-sm-6">{{url.url}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

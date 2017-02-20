@@ -413,9 +413,46 @@ blogControllers.controller('LogoutCtrl', ['$scope', 'UM', '$ngBootbox', 'storage
     }
 ])
 
-//登出控制器
-blogControllers.controller('TagCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth',
+//照片上传控制器
+blogControllers.controller('ImageCtrl', ['$scope', 'UM', '$ngBootbox', 'storage', 'Auth',
     function ($scope, UM, $ngBootbox, storage, Auth) {
-        console.log('标签云')
+
+        $scope.$on('$viewContentLoaded', function () {
+            loadFileinput();
+        });
+        $scope.urls = [];
+        function loadFileinput() {
+            $("#file").fileinput({
+                language: 'zh', //设置语言
+                uploadUrl: "/api/common/image", //上传的地址
+                allowedFileExtensions: ["jpg", "png", "gif", 'jpeg'],
+                browseOnZoneClick: true,
+                maxFileCount: 10,
+                maxFileSize: 2000,
+                resizePreference: 'height',
+                overwriteInitial: false,
+                uploadLabel: "上传",
+                browseLabel: "选择图片",
+                dropZoneTitle: "点击",
+                dropZoneClickTitle: "选择图片",
+                browseClass: "btn btn-primary", //按钮样式
+                showCaption: false, //是否显示标题
+                resizeImage: true
+            })
+        }
+
+
+        $('#file').on('fileuploaded', function (event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+               $scope.detail = {
+                   name:response.name,
+                   url:response.url
+               }
+               $scope.urls.push($scope.detail)
+               $scope.$apply();
+        });
+
+
     }
 ])

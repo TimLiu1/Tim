@@ -38,6 +38,10 @@ router.config(['$routeProvider',
                 templateUrl: '/html/blog/partials/tag.html',
                 controller: 'TagCtrl'
             }).
+             when('/image', {
+                templateUrl: '/html/blog/partials/image.html',
+                controller: 'ImageCtrl'
+            }).
             otherwise({
                 redirectTo: '/index'
             });
