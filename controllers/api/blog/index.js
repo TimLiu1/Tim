@@ -106,7 +106,8 @@ module.exports = function (app) {
         }
         conditionPage = {
             page: currentPage,
-            limit: LIMIT
+            limit: LIMIT,
+            sort: "-createdAt"
         }
         logger.info(condition);
         if (req.body.currentPage) {

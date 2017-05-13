@@ -1,0 +1,46 @@
+[{
+        "name": "tim1",
+        "script": "/Users/Macx/Desktop/tim/testTim/Tim/server.js",
+        "log_date_format": "YYYY-MM-DD HH-mm Z",
+        "error_file": "./logs/tim1-err.log",
+        "out_file": "./logs/tim1.log",
+        "max_memory_restart": "1G",
+        "watch": false,
+        "exec_mode": "fork_mode", //启动方式 
+        "instances": "1", //启动实例的个数
+        "env": {
+            "NODE_ENV": "development",
+            "PORT": "8888"
+        }
+    },
+    {
+        "name": "tim2",
+        "script": "/Users/Macx/Desktop/tim/testTim/Tim/server.js",
+        "log_date_format": "YYYY-MM-DD HH-mm Z",
+        "error_file": "./logs/tim2-err.log",
+        "out_file": "./logs/tim2.log",
+        "max_memory_restart": "1G",
+        "watch": false,
+        "exec_mode": "fork_mode", //启动方式 
+        "instances": "1", //启动实例的个数
+        "env": {
+            "NODE_ENV": "development",
+            "PORT": "8889"
+        }
+    },
+    {
+        "name": "tim3",
+        "script": "/Users/Macx/Desktop/tim/testTim/Tim/server.js",
+        "log_date_format": "YYYY-MM-DD HH-mm Z",
+        "error_file": "./logs/tim3-err.log",
+        "out_file": "./logs/tim3.log",
+        "max_memory_restart": "1G",
+        "watch": false,
+        "exec_mode": "fork_mode", //启动方式 
+        "instances": "1", //启动实例的个数
+        "env": {
+            "NODE_ENV": "development",
+            "PORT": "8810"
+        }
+    }
+]

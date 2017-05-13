@@ -1,36 +1,24 @@
-<div style="width:80%"  class="container-fluid">
-<h5>{{blog.title}}</h5>
-  <div class="collapse navbar-collapse" id="navbar-collapse-5">
- <ul class="nav navbar-nav">
+<div style="width:80%" class="container-fluid">
+    <h5>{{blog.title}}</h5>
+    <div class="collapse navbar-collapse" id="navbar-collapse-5">
+        <ul class="nav navbar-nav">
             <!--<li><a href="" ng-show="user.username == blog.postMan" ng-click="delete()">删除</a></li>
             <li><a  ng-show="user.username == blog.postMan"  href="#/updateBlog/{{_id}}">更新</a></li>-->
             <li><a href="" ng-show="user.username == blog.postMan" ng-click="delete()">删除</a></li>
-            <li><a  ng-show="user.username == 'timliu'"  href="#/updateBlog/{{_id}}">更新</a></li>
+            <li><a ng-show="user.username == 'timliu'" href="#/updateBlog/{{_id}}">更新</a></li>
             <li><a href="#">标签</a></li>
-            <li ><a>作者: {{blog.postMan}}</a></li>
-            <li ><a>发布时间: {{blog.createdAt | date: "yyyy-MM-dd"}}</a></li>
-           </ul>
-  </div>
-<hr>
+            <li><a>作者: {{blog.postMan}}</a></li>
+            <li><a>发布时间: {{blog.createdAt | date: "yyyy-MM-dd"}}</a></li>
+        </ul>
+    </div>
+    <hr>
 
-<p ng-bind-html="blog.content | trust"></p>
+    <p ng-bind-html="blog.content | trust"></p>
 
-<button type="button" ng-click="goBack()" class="btn btn-primary"><< 返回</button>
-<!-- UY BEGIN -->
-<div id="uyan_frame"></div>
-<!--<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>-->
-<!-- UY END -->
-<div style="margin-top: 20px;" id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    <button type="button" ng-click="goBack()" class="btn btn-primary"><< 返回</button>
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <!--<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>-->
+    <!-- UY END -->
+    <div style="margin-top: 20px;" id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 </div>
-
-
-<script>
- var url = window.location.href
-  var cloudTieConfig = {
-    url: document.location.href, 
-    sourceId: url,
-    productKey: "0cd20afdcf7d4a9681bb96eb0d3649f4",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
