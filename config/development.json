@@ -1,19 +1,24 @@
 {
-     "loggerLevel": "debug",
+    "loggerLevel": "debug",
     "express": {
         "view cache": false,
         "view engine": "dust",
         "views": "path:./public/templates"
     },
-
-      "databaseConfig": {
+    "databaseConfig": {
         // "host": "localhost:27017",
         "host": "123.206.217.94",
         "database": "Tim",
-        "options": {"user": "tim", "pass": "1qaz2wsx"}
+        "options": {
+            "user": "tim",
+            "pass": "1qaz2wsx",
+            "useMongoClient": true,
+            "server": {
+                "auto_reconnect": true,
+                "poolSize": 10
+            }
+        }
     },
-
-    
     "view engines": {
         "dust": {
             "module": "makara",
@@ -29,11 +34,7 @@
             }
         }
     },
-    
-    
-
     "middleware": {
-
         "devtools": {
             "enabled": true,
             "priority": 35,
@@ -43,14 +44,11 @@
                     "path:./public",
                     "path:./.build",
                     {
-                        
                         "template": {
                             "module": "construx-dustjs",
                             "files": "/templates/**/*.js",
                             "base": "templates"
                         },
-                        
-                        
                         "copier": {
                             "module": "construx-copier",
                             "files": "**/*"
@@ -59,7 +57,7 @@
                 ]
             }
         },
-         "csrf": {
+        "csrf": {
             "enabled": false,
             "priority": 111,
             "route": "/((?!tpi|weixin|api|level|data|agent))*",
@@ -71,6 +69,5 @@
                 ]
             }
         }
-
     }
 }

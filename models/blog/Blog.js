@@ -2,10 +2,10 @@
 let mongoose = require('mongoose');
 let updatedTimestamp = require('mongoose-updated_at');
 let mongoosePaginate = require('mongoose-paginate');
-let autoIncrement = require('mongoose-auto-increment');
+// let autoIncrement = require('mongoose-auto-increment');
 
 let connection = mongoose.connection;
-autoIncrement.initialize(connection);
+// autoIncrement.initialize(connection);
 
 let blogShema = new mongoose.Schema({
     // 作者
@@ -30,11 +30,11 @@ let blogShema = new mongoose.Schema({
 }, { collection: 'blog' });
 
 blogShema.plugin(updatedTimestamp);
-blogShema.plugin(autoIncrement.plugin, {
-    model: 'blog',
-    field: 'order',
-    startAt: 8
-});
+// blogShema.plugin(autoIncrement.plugin, {
+//     model: 'blog',
+//     field: 'order',
+//     startAt: 8
+// });
 blogShema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('blogShema', blogShema);
