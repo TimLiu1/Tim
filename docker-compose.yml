@@ -1,0 +1,21 @@
+version: '2.1'
+
+services:
+  tim:
+    image: tim
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8888:8888
+  mongo:
+   image: mongo
+   volumes: 
+      - /data/db:/data/db 
+   ports:
+      - 27017:27017
+   command: --auth
+  redis:
+   image: redis
+   ports:
+      - 6379:6379 
