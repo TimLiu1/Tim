@@ -14,7 +14,6 @@ services:
       - /data/db:/data/db 
    ports:
       - 27017:27017
-   command: --auth
   redis:
    image: redis
    ports:
