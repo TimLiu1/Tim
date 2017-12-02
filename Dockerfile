@@ -1,5 +1,5 @@
 FROM node:8-alpine
-ENV NODE_ENV production
+ENV NODE_ENV development
 WORKDIR /usr/src/app
 COPY ["package.json", "npm-shrinkwrap.json*", "./"]
 RUN npm config set registry https://registry.npm.taobao.org && \
