@@ -41,7 +41,7 @@ module.exports = function (app) {
     app.options('*', cors())
     //发布博文
     app.post('/blog', Auth.isAuthenticated(), function (req, res, next) {
-        logger.info('发布文章')
+        logger.info('发布文章', req.body)
         logger.info('发布文章user' + JSON.stringify(req.user));
         let articleJson = req.body;
         articleJson.postMan = req.user.username;
@@ -49,7 +49,8 @@ module.exports = function (app) {
         let article = new blog(articleJson);
         article.save(function (err, result) {
             if (err) {
-                next()
+                console.log("err",err)
+                return next()
             }
             res.json(result);
         })
