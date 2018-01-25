@@ -24,6 +24,7 @@
     "express": "^4.12.2",
     "highlight": "^0.2.4",
     "highlight.js": "^9.7.0",
+    "ioredis": "^3.2.2",
     "jsonwebtoken": "^7.1.9",
     "kraken-js": "^2.0.0",
     "log4js": "^0.6.38",

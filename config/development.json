@@ -5,9 +5,15 @@
         "view engine": "dust",
         "views": "path:./public/templates"
     },
+    "cacheConfig": {
+        "port": 6379,
+        "host": "localhost",
+        "password": "123abc",
+        "options": {}
+    },
     "databaseConfig": {
         // "host": "localhost:27017",
-        "host": "123.206.217.94",
+        "host": "localhost",
         "database": "Tim",
         "options": {
             "user": "tim",
