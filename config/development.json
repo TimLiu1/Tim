@@ -13,7 +13,7 @@
     },
     "databaseConfig": {
         // "host": "localhost:27017",
-        "host": "localhost",
+        "host": "123.206.217.94",
         "database": "Tim",
         "options": {
             "user": "tim",
