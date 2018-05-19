@@ -12,7 +12,6 @@
         "options": {}
     },
     "databaseConfig": {
-        // "host": "localhost:27017",
         "host": "123.206.217.94",
         "database": "Tim",
         "options": {
